@@ -1,0 +1,3 @@
+<launch>
+        <include file="$(find zed_display_rviz)/launch/display_zed.launch" />
+</launch>

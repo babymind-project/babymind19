@@ -1,18 +1,38 @@
-## third-party requirements
+## Prerequisite
+1. nvidia driver +CUDA 10.0 + CUDNN7.5
+2. zed, pyzed
+ https://github.com/stereolabs/zed-python-api 
+ https://www.stereolabs.com/developers/
+3. ros-melodic
+4. tensorflow-gpu
 
-1. gpu resources
-nvidia driver +CUDA 10.0 + CUDNN7.5
+## Preliminaries
+1. viocn IP setup
+```
+gedit ./catkin_ws/vicon_bridge_launchvicon.launch
+edit datastream_hostport value as yout vicon IP address
+```
 
-2. [sdk, python package] zed, pyzed
-https://github.com/stereolabs/zed-python-api 
-https://www.stereolabs.com/developers/
+## Main
+0. Setup project
+```
+source ./setup.sh
+```
 
-3. [ros package] vicon_bridge
+1. Collect data
+To watch the field of view of the camera, following code will show an rviz map of the camera.
+```
+python3 ./collect_data.py [task_name] [demo_name] --watch
+```
 
+If you want to record both vicon and vision, following code generates 'raw.bag' at './data/[task_name]/[demo_name].
+```
+python3 ./collect_data.py [task_name] [demo_name] --vicon
+```
 
-
-
-4. viocn setup: 192.168.1.108:801
-
+If you want to record vision only
+```
+python3 ./collect_data.py [task_name] [demo_name]
+```
 
 
