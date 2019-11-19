@@ -7,14 +7,14 @@
 4. tensorflow-gpu
 
 ## Preliminaries
-1. Setup vicon IP
+### 1. Set-up vicon IP
 ```
 gedit ./catkin_ws/vicon_bridge_launchvicon.launch
 edit datastream_hostport value as yout vicon IP address
 ```
 
 ## Main
-### 0. Setup project
+### 0. Set-up project
 ```
 source ./setup.sh
 ```
@@ -25,7 +25,7 @@ To watch the field of view of the camera, following code will show an rviz map o
 python3 ./collect_data.py [task_name] [demo_name] --watch
 ```
 
-If you want to record both vicon and vision, following code generates **"raw.bag.activate"** at **"./data/[task_name]/[demo_name]"**.
+If you want to record both vicon and vision, 
 ```
 python3 ./collect_data.py [task_name] [demo_name] --vicon
 ```
@@ -34,5 +34,7 @@ If you want to record vision only
 ```
 python3 ./collect_data.py [task_name] [demo_name]
 ```
+
+check **raw.bag.activate** is generated at **./data/[task_name]/[demo_name]**.
 
 ### 2. Preprocess data
