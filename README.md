@@ -1,13 +1,13 @@
 ## Prerequisite
 1. nvidia driver +CUDA 10.0 + CUDNN7.5
-2. zed, pyzed
- https://github.com/stereolabs/zed-python-api 
- https://www.stereolabs.com/developers/
+2. zed, pyzed:\
+ https://github.com/stereolabs/zed-python-api \
+ https://www.stereolabs.com/developers \
 3. ros-melodic
 4. tensorflow-gpu
 
 ## Preliminaries
-1. viocn IP setup
+1. Setup vicon IP
 ```
 gedit ./catkin_ws/vicon_bridge_launchvicon.launch
 edit datastream_hostport value as yout vicon IP address
