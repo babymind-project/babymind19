@@ -1,0 +1,7 @@
+<launch>
+	<include file="$(find vicon_bridge)/launch/vicon.launch" />
+        <include file="$(find zed_wrapper)/launch/zed.launch" />
+	<!--node pkg="image_view" name="image_view" type="image_view" /-->
+	<!--remap from="/zed/zed_node/rgb/image_rect_color" to="/image" /-->
+        <include file="$(find zed_display_rviz)/launch/display_zed.launch" />
+</launch>

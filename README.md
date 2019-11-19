@@ -12,3 +12,7 @@ https://www.stereolabs.com/developers/
 
 
 
+4. viocn setup: 192.168.1.108:801
+
+
+

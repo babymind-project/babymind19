@@ -1,9 +1,3 @@
-# 1. setup bashrc  
-source ~/.bashrc
+# 1. ros/catkin
+source ./setup/catkin.sh
 
-# 2.make ros src
-cd catkin_ws
-catkin_make
-cd ..
-
-# 3.

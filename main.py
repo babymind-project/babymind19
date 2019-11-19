@@ -7,6 +7,7 @@ import json
 import os
 import random
 import sys
+from termcolor import colored
 import traceback
 import yaml
 
