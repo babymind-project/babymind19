@@ -25,7 +25,7 @@ To watch the field of view of the camera, following code will show an rviz map o
 python3 ./collect_data.py [task_name] [demo_name] --watch
 ```
 
-If you want to record both vicon and vision, following code generates 'raw.bag' at './data/[task_name]/[demo_name].
+If you want to record both vicon and vision, following code generates **"raw.bag.activate"** at **"./data/[task_name]/[demo_name]"**.
 ```
 python3 ./collect_data.py [task_name] [demo_name] --vicon
 ```
