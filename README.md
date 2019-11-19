@@ -14,12 +14,12 @@ edit datastream_hostport value as yout vicon IP address
 ```
 
 ## Main
-0. Setup project
+### 0. Setup project
 ```
 source ./setup.sh
 ```
 
-1. Collect data
+### 1. Collect data  
 To watch the field of view of the camera, following code will show an rviz map of the camera.
 ```
 python3 ./collect_data.py [task_name] [demo_name] --watch
@@ -35,4 +35,4 @@ If you want to record vision only
 python3 ./collect_data.py [task_name] [demo_name]
 ```
 
-
+### 2. Preprocess data
