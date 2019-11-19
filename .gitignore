@@ -1,0 +1,10 @@
+data
+figure
+log
+output
+preprocess
+repo
+weight
+catkin_ws/build
+catkin_ws/devel
+*.pyc
