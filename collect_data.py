@@ -31,24 +31,31 @@ if __name__ == '__main__':
         print(colored('type like: python3 ./collect_data.py [task_name] [demo_name] [option]'),'r')
         print(colored('ex: python3 ./collect_data.py task1 demo0 --vicon'))
     
+    ## Just watch camera output
     if WATCH:
         p_rviz = subprocess.Popen('roslaunch babymind image_visualize.launch', stdout = subprocess.PIPE, shell = True)
         input(colored('stop watch? [y/n]', 'green'))
         os.killpg(os.getpgid(p_rviz.pid), signal.SIGTERM)
         sys.exit()
-        
+
+    ## Log vision (+vicon) data
+    save_dir = './data/'+task_name+'/'+demo_name  
     if VICON:
         p_ros = subprocess.Popen('roslaunch babymind data_collect.launch', stdout = subprocess.PIPE, shell = True)
+        topics = ['/zed/zed_node/rgb/image_rect_color', '/zed/zed_node/depth/depth_registered', '/vicon/k_sweeper/k_sweeper']
     else:
-        p_ros = subprocess.Popen('roslaunch babymind data_collect_no_vicon.launch', stdout = None, shell = True)
-
-    save_dir = './data/'+task_name+'/'+demo_name
-    util.create_dir(save_dir, clear = True)
+        p_ros = subprocess.Popen('roslaunch babymind data_collect_no_vicon.launch', stdout =  subprocess.PIPE, shell = True)
+        topics = ['/zed/zed_node/rgb/image_rect_color', '/zed/zed_node/depth/depth_registered']
     
-    start_record = input(colored('start record? [y/n]','green'))
+    merged_topic = ''
+    for topic in topics:
+        merged_topic += (' ' +topic)
+
+    start_record = input(colored('Start record? [y/n]','green'))
+    util.create_dir(save_dir, clear = True)  
     if start_record == 'y':
-        print(colored('ctrl+c will finish record','green'))
-        os.system('rosbag record -O '+save_dir+'/raw.bag'+' /zed/zed_node/stereo/image_rect_color /vicon/k_sweeper/k_sweeper')
+        print(colored('Press ctrl+c will finish record','green'))
+        os.system('rosbag record -O '+save_dir+'/raw.bag'+merged_topic)
     print('terminate program')
     os.killpg(os.getpgid(p_ros.pid), signal.SIGTERM)
     sys.exit()

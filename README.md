@@ -35,6 +35,12 @@ If you want to record vision only
 python3 ./collect_data.py [task_name] [demo_name]
 ```
 
-Check **"raw.bag.activate"** is generated at **"./data/[task_name]/[demo_name]"**.
+Check **"raw.bag.activate"** is generated in **"./data/[task_name]/[demo_name]"**.
 
-### 2. Preprocess data
+### 2. convert bag file to rgb/depth/vcion data
+```
+python3 ./read_bag.py [task_name]
+```
+Check **depth, rgb, vicon folders** are generated in **"./data/[task_name]/[demo_name]"**
+
+
