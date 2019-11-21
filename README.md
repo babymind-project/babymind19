@@ -12,6 +12,9 @@
 gedit ./catkin_ws/vicon_bridge_launchvicon.launch
 edit datastream_hostport value as yout vicon IP address
 ```
+### 2. Set-up vicon object
+vicon objects should be named same as defined in ./configure/[task_name]_objects.txt
+
 
 ## Main
 ### 0. Set-up project
@@ -43,4 +46,11 @@ python3 ./read_bag.py [task_name]
 ```
 Check **depth, rgb, vicon folders** are generated in **"./data/[task_name]/[demo_name]"**
 
+
+### 3. make segment label
+```
+python3 ./make_segment_label.py [task_name] [demo_name]
+```
+
+### 4.
 

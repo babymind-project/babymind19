@@ -13,6 +13,12 @@ animation:
     fps: 20
 
 preprocess:
+    start_time: 1574235760081525896
+    end_time: 1574235761345272442
+
+
+
+preprocess:
     skip_frame: NotImplemented
     image_size: [376,672]
     resize_shape: [256, 256] 

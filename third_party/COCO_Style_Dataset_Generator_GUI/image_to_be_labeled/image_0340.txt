@@ -1,0 +1,8 @@
+11
+/media/k/hdd/git_repository/scene_imitation/hope/scene_imitation/lib/third_party/COCO-Style-Dataset-Generator-GUI/image_to_be_labeled/image_0340.png
+672 376
+
+box
+2132.34
+434.29 81.60 426.85 89.67 413.85 116.03 421.28 123.56 425.62 130.01 467.11 132.70 486.31 131.09 494.98 130.01 504.89 128.40 507.99 121.41 506.75 102.04 501.80 83.22 492.51 78.91 439.86 79.99 434.29 81.60 
+

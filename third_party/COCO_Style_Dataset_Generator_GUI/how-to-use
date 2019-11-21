@@ -1,0 +1,24 @@
+** Important modification
+I fix the code in crate_json_file.py, line 31 
+
+1) create label
+python3 segment.py -i image_to_be_labeled/ -c classes/objects.txt
+
+2) combine json
+
+
+3) create json 
+python3 ./create_json_file.py -i image_to_be_labeled/ -c classes/objects.txt -o json/instances_train -t png
+
+
+## step2: data mask generation
+1. go third_party/COCO-style-data-generation
+2. copy image to be labeld in the ./image_to_be_labeled
+   (about a fourth of the images are enough to label)
+3. create class file in ./classes (like classes/objects.txt)
+   or using existing class files is OK
+4. create label
+python3 segment.py -i image_to_be_labeled/ -c classes/objects.txt
+
+5. create json
+python3 ./create_json_file.py -i image_to_be_labeled/ -c classes/objects.txt -o json/instances_train -t png

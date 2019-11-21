@@ -49,13 +49,13 @@ if __name__ == '__main__':
     
     merged_topic = ''
     for topic in topics:
-        merged_topic += (' ' +topic)
+        merged_topic += (topic+' ')
 
     start_record = input(colored('Start record? [y/n]','green'))
     util.create_dir(save_dir, clear = True)  
     if start_record == 'y':
         print(colored('Press ctrl+c will finish record','green'))
-        os.system('rosbag record -O '+save_dir+'/raw.bag'+merged_topic)
+        os.system('rosbag record -O %s/raw.bag %s'%(save_dir,merged_topic))
     print('terminate program')
     os.killpg(os.getpgid(p_ros.pid), signal.SIGTERM)
     sys.exit()
