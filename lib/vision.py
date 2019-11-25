@@ -535,7 +535,7 @@ class Smoother():
             return loss
 
 class SE3object():
-    def __init__(self, init_state, angle_type = 'euler'):
+    def __init__(self, init_state = [0,0,0,0,0,0], angle_type = 'euler'):
         '''
         init_state: numpy array shape with 12 
         init_state[0:3] : xyz  

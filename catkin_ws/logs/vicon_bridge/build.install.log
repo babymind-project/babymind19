@@ -1,10 +1,10 @@
 [  5%] Built target testclient
-[  5%] Built target geometry_msgs_generate_messages_cpp
 [  5%] Built target _vicon_bridge_generate_messages_check_deps_viconCalibrateSegment
 [  5%] Built target _vicon_bridge_generate_messages_check_deps_Marker
 [  5%] Built target _vicon_bridge_generate_messages_check_deps_viconGrabPose
 [  5%] Built target _vicon_bridge_generate_messages_check_deps_Markers
 [  5%] Built target _vicon_bridge_generate_messages_check_deps_TfDistortInfo
+[  5%] Built target geometry_msgs_generate_messages_cpp
 [ 17%] Built target vicon_bridge_generate_messages_cpp
 [ 17%] Built target vicon_bridge_gencpp
 [ 20%] Built target vicon_bridge_gencfg

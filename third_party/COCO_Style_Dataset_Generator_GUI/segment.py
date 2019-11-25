@@ -318,7 +318,7 @@ class COCO_dataset_generator(object):
     def reset(self, event):
         
         if not self.click_id:
-            self.click_id = fig.canvas.mpl_connect('button_press_event', self.onclick)
+            self.click_id = self.fig.canvas.mpl_connect('button_press_event', self.onclick)
         #print (len(self.lines))
         #print (len(self.circles))
         if len(self.points)>5:

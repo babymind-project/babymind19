@@ -17,34 +17,47 @@ from lib import util
 if __name__ == '__main__':
     try:
         parser = argparse.ArgumentParser()
-        parser.add_argument('data_name')
+        parser.add_argument('task_name')
         parser.add_argument('module_name')
         parser.add_argument('-c','--continuous', action = 'store_true')
         parser.add_argument('-t', '--test', action = 'store_true')
-        parser.add_argument('-ft', '--fast_test', action = 'store_true')
+        parser.add_argument('-tr', '--train', action = 'store_true')
 
         args = parser.parse_args()
-        data_name = args.data_name
+        task_name = args.task_name
         module_name = args.module_name
         CONTINUOUS = args.continuous
         TEST = args.test
-        FAST_TEST = args.fast_test
+        TRAIN = args.train
     except:
         traceback.print_exc()
-        print('type like: python3 ./main.py [data_name] [module_name]')
+        print('type like: python3 ./main.py [task_name] [module_name]')
     
-    config = util.load_yaml('./configure/'+data_name+'.yaml')
+    config = util.load_yaml('./configure/'+task_name+'.yaml')
     if module_name == 'preprocess' or module_name == 'pre':
-        pass
+        from algorithm.Preprocess import preprocess
+        preprocess(config)
 
     elif module_name == 'segment' or module_name == 'seg':
-        from lib.module.Segment_network import Segment_network
+        from algorithm.Segment_network import Segment_network
         seg_net = Segment_network(config)
         seg_net.build()
         if TEST:
             seg_net.test()
         else:
             seg_net.train(continuous = CONTINUOUS)
+
+
+
+
+
+
+
+
+
+
+
+
 
     elif module_name == 'pose':
         from lib.module.Pose_network import Pose_network

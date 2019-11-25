@@ -179,8 +179,8 @@ python3 = True if sys.hexversion > 0x03000000 else False
 import genpy
 import struct
 
-import std_msgs.msg
 import geometry_msgs.msg
+import std_msgs.msg
 
 class viconGrabPoseResponse(genpy.Message):
   _md5sum = "236213ed6979c1ab1c49bd1bc04ace9e"

@@ -39,13 +39,18 @@ if __name__ == '__main__':
         sys.exit()
 
     ## Log vision (+vicon) data
+    object_names = util.load_txt('./configure/'+task_name+'_objects.txt')
+    vicon_topics = ['/vicon/k_giant_ur3/k_giant_ur3', '/vicon/k_zed/k_zed']
+    vicon_topics += ['/vicon/'+name+'/'+name for name in object_names ]
+    camera_topics = ['/zed/zed_node/rgb/image_rect_color', '/zed/zed_node/depth/depth_registered']
+
     save_dir = './data/'+task_name+'/'+demo_name  
     if VICON:
         p_ros = subprocess.Popen('roslaunch babymind data_collect.launch', stdout = subprocess.PIPE, shell = True)
-        topics = ['/zed/zed_node/rgb/image_rect_color', '/zed/zed_node/depth/depth_registered', '/vicon/k_sweeper/k_sweeper']
+        topics = camera_topics + vicon_topics
     else:
         p_ros = subprocess.Popen('roslaunch babymind data_collect_no_vicon.launch', stdout =  subprocess.PIPE, shell = True)
-        topics = ['/zed/zed_node/rgb/image_rect_color', '/zed/zed_node/depth/depth_registered']
+        topics = camera_topics
     
     merged_topic = ''
     for topic in topics:

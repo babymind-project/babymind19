@@ -34,8 +34,9 @@ if __name__ == '__main__':
     class_file = './configure/'+task_name+'_objects.txt'
     label_dir = './output/'+task_name+'/label/'+demo_name+'/labeled_img'
     util.create_dir(label_dir, clear = True)
-    json_file = './output/'+task_name+'/label/'+demo_name+'/segment_label'
-
+    json_dir = './output/'+task_name+'/label/'+demo_name+'/annotations'
+    util.create_dir(json_dir, clear = True)
+    
     skip = input(colored('Pleas enter the number of skipping frames for eveery one label [current demo has %d images]'%len(rgb_imgs), 'green'))
     skip = int(skip)
 
@@ -51,6 +52,4 @@ if __name__ == '__main__':
     label_maker.run(image_dir = label_dir, class_file= class_file)
 
     import third_party.COCO_Style_Dataset_Generator_GUI.create_json_file as json_maker
-    json_maker.run(image_dir = label_dir, class_file = class_file, file_type = 'png', file_path = json_file)
-
-    IPython.embed()
+    json_maker.run(image_dir = label_dir, class_file = class_file, file_type = 'png', file_path = json_dir+'/segment_label')

@@ -1,29 +1,28 @@
-data_name: task0
+task_name: task0
 
 camera:
-    camera: 'zed_mini'
+    camera: 'zed'
     camera_fps: 60
     camera_resolution: VGA #VGA-672,376
     depth_mode: ULTRA #PERFORMANCE
     depth_max: 16000
     depth_min: 100
-    vicon : True
+    image_size : [720, 1280]
     
 animation:
     fps: 20
 
 preprocess:
-    start_time: 1574235760081525896
-    end_time: 1574235761345272442
-
-
-
-preprocess:
     skip_frame: NotImplemented
-    image_size: [376,672]
-    resize_shape: [256, 256] 
-    image_min_dim: 672
-    image_max_dim: 672
+    image_size: [360, 640]
+    scale : 0.5
+    
+
+
+
+
+
+
 
 robot:
     acceleration: 0.3 #0.9

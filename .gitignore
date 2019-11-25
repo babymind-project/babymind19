@@ -4,6 +4,7 @@ log
 output
 preprocess
 repo
+supplement
 weight
 catkin_ws/build
 catkin_ws/devel
