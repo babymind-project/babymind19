@@ -80,8 +80,8 @@ def np_cloud_transformer(depth, camera = 'zed', scale = 1.):
     fx = intrinsic.fx
     fy = intrinsic.fy
     
-    height = x.shape[0] #
-    width  = x.shape[1] #
+    height = depth.shape[0] #
+    width  = depth.shape[1] #
     
     x_linspace = np.linspace(-cx,1-cx, width) # image height, array x
     y_linspace = np.linspace(-cy,1-cy, height) # imagw width, array y
