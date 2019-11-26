@@ -33,8 +33,8 @@ segment:
     learning_rate: 0.00001
 
 pose: 
-    batch_size : 8
-    scale : 0.5
+    batch_size : 1
+    scale : 0.375
     supervision : 'never' #'never' #'full' #'both_ends'
     learning_rate: 0.00001 
 
