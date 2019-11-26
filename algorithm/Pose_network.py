@@ -202,7 +202,7 @@ class Pose_network(Network):
 
         self.mode = mode
         self.network_name = 'pose'
-        self.task_name = config['data_name']
+        self.task_name = config['task_name']
         self.supervision = config['pose']['supervision']
         self.scale = config['pose']['scale']
         self.batch_size = config['pose']['batch_size']  
