@@ -681,7 +681,7 @@ class SE3object():
         ax.plot(zbar[0,:], zbar[1,:], zbar[2,:], color='b', linewidth = linewidth)
 
 
-def get_com(mask, depth, obj_idx, intrinsic, init_R = np.eye(3), scale = 0.5):
+def get_com(mask, depth, obj_idx, init_R = np.eye(3), scale = 0.5):
     h = mask.shape[0]
     w = mask.shape[1]
 
