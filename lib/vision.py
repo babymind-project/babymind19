@@ -349,7 +349,8 @@ class Optical_transformer():
         self.img_h=self.intrinsic.h
         self.mask_size = mask_ch
         self.input_type = input_type
-
+        IPython.embed()
+        
         so3_a=np.array([
             [0,-1,0,1,0,0,0,0,0],
             [1,0,0,0,1,0,0,0,0],

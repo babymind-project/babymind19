@@ -1,7 +1,7 @@
 task_name: task1
 
 camera:
-    camera: 'zed_mini'
+    camera: 'zed'
     camera_fps: 60
     camera_resolution: VGA #VGA-672,376
     depth_mode: ULTRA #PERFORMANCE
