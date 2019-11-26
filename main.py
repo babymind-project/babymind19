@@ -58,6 +58,17 @@ if __name__ == '__main__':
             pose_net.build()
             pose_net.train(continuous=CONTINUOUS)
 
+    elif module_name == 'read_pose':
+        from algorithm.read_pose import read
+        #from lib.module.read_pose2 import read as read2
+        '''
+        read_pose :  draw 6d-pose in three-deimnsional space
+        read_pose2 : draw 6d-pose projection on an image plane
+        '''
+        read(config)
+        #read2(config)
+
+
     """    
     elif module_name == 'sfm_pose': # baseline1
         from lib.module.Sfm_pose_network import Sfm_pose_network

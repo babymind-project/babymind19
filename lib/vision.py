@@ -60,6 +60,49 @@ class Zed_mini_intrinsic(Intrinsic):
         
 
 ## vision algorithm
+def np_cloud_transformer(depth, camera = 'zed', scale = 1.):
+    '''
+    depth: [h,w]
+
+    [(xi/w-cx)/fx,(yi/h-cy)/fy,1]
+    next just 
+    d*[(xi/w-cx)/fx,(yi/h-cy)/fy,1]
+        to get [Xi,Yi,Zi]    
+    '''
+    if camera == 'zed':
+        intrinsic = Zed_intrinsic(scale)
+    elif camera == 'zed_mini':
+        intrinsic = Zed_mini_intrinsic(scale)
+    output_dim = 3
+        
+    cx = intrinsic.cx
+    cy = intrinsic.cy
+    fx = intrinsic.fx
+    fy = intrinsic.fy
+    
+    height = x.shape[0] #
+    width  = x.shape[1] #
+    
+    x_linspace = np.linspace(-cx,1-cx, width) # image height, array x
+    y_linspace = np.linspace(-cy,1-cy, height) # imagw width, array y
+    
+    x_cord, y_cord = np.meshgrid(x_linspace, y_linspace)
+    x_cord = np.reshape(x_cord,[-1])
+    y_cord = np.reshape(y_cord,[-1])
+    f_= np.ones_like(x_cord)
+    
+    x_=np.divde(x_cord, fx)
+    y_=np.divde(y_cord, fy)
+    
+    grid = np.concatenate([x_, y_, f_],0)
+    
+    depth=np.reshape(depth,[1,-1])
+    depth=np.tile(depth, [output_dim,1])
+    point_cloud=tf.multiply(depth, grid)
+    return point_cloud
+
+
+
 class Cloud_transformer():
     def __init__(self, intrinsic='zed', scale=1., **kwargs):
         ## set intrinsic 
