@@ -32,8 +32,6 @@ if __name__ == '__main__':
     except:
         traceback.print_exc()
         print('type like: python3 ./main.py [task_name] [module_name]')
-    IPython.embed()
-    sys.exit()
     
     config = util.load_yaml('./configure/'+task_name+'.yaml')
     if module_name == 'preprocess' or module_name == 'pre':
