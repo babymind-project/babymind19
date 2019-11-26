@@ -91,8 +91,8 @@ def np_cloud_transformer(depth, camera = 'zed', scale = 1.):
     y_cord = np.reshape(y_cord,[-1])
     f_= np.ones_like(x_cord)
     
-    x_=np.divde(x_cord, fx)
-    y_=np.divde(y_cord, fy)
+    x_=np.divide(x_cord, fx)
+    y_=np.divide(y_cord, fy)
     
     grid = np.concatenate([x_, y_, f_],0)
     
