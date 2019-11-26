@@ -61,13 +61,14 @@ def read(config):
         se30 = se3_traj[ref_frame,obj_idx,:]
         mask0 = np.load(mask_files[ref_frame])
         depth0 = np.load(depth_files[ref_frame]) 
+        depth0 = cv2.cv2.resize(depth0, None, fx=scale, fy=scale)
         pc0 = vision.np_cloud_transformer(depth0, 'zed', scale = scale)
 
         init_R = se3_to_SE3(se30)[0:3,0:3]
-        com = vision.get_com(mask0, pc0, obj_idx, init_R = init_R, scale = scale)
+        com = vision.get_com(mask0, pc0, obj_idx, init_R = init_R)
 
         g_c_com = se3_to_SE3(com)
-        g_co = se3_to_SE3(se30)
+        g_co = se3_to_SdE3(se30)
         g_oc = inv_SE3(g_co)
         g_o_com = np.matmul(g_oc, g_c_com)
         
