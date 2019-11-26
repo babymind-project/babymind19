@@ -1,5 +1,0 @@
-zed-ros-wrapper/examples/zed_ar_track_alvar_example
-/home/k/Desktop/git_repository/babymind19/catkin_ws/devel/.private/zed_ar_track_alvar_example/cmake.lock /home/k/Desktop/git_repository/babymind19/catkin_ws/devel/./cmake.lock
-/home/k/Desktop/git_repository/babymind19/catkin_ws/devel/.private/zed_ar_track_alvar_example/lib/pkgconfig/zed_ar_track_alvar_example.pc /home/k/Desktop/git_repository/babymind19/catkin_ws/devel/lib/pkgconfig/zed_ar_track_alvar_example.pc
-/home/k/Desktop/git_repository/babymind19/catkin_ws/devel/.private/zed_ar_track_alvar_example/share/zed_ar_track_alvar_example/cmake/zed_ar_track_alvar_exampleConfig-version.cmake /home/k/Desktop/git_repository/babymind19/catkin_ws/devel/share/zed_ar_track_alvar_example/cmake/zed_ar_track_alvar_exampleConfig-version.cmake
-/home/k/Desktop/git_repository/babymind19/catkin_ws/devel/.private/zed_ar_track_alvar_example/share/zed_ar_track_alvar_example/cmake/zed_ar_track_alvar_exampleConfig.cmake /home/k/Desktop/git_repository/babymind19/catkin_ws/devel/share/zed_ar_track_alvar_example/cmake/zed_ar_track_alvar_exampleConfig.cmake

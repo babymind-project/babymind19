@@ -40,12 +40,12 @@ class Zed_intrinsic(Intrinsic):
     def __init__(self, scale = 1.):
         self.w = int(1280*scale)
         self.h = int(720*scale)
-        self.f = 336.11279
+        self.f = 676.5778198
         self.fx = (self.f/self.w)*scale
         self.fy = (self.f/self.h)*scale
         
-        self.cx = (338.79229/self.w)*scale
-        self.cy = (196.26330/self.h)*scale
+        self.cx = (647.502624511/self.w)*scale
+        self.cy = (377.535461425/self.h)*scale
 
 class Zed_mini_intrinsic(Intrinsic):
     def __init__(self, scale = 1.):

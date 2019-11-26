@@ -1,8 +1,0 @@
-prefix=/home/k/Desktop/git_repository/babymind19/catkin_ws/install
-
-Name: zed_ar_track_alvar_example
-Description: Description of zed_ar_track_alvar_example
-Version: 2.6.0
-Cflags: 
-Libs: -L/home/k/Desktop/git_repository/babymind19/catkin_ws/install/lib 
-Requires: 
