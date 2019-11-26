@@ -29,7 +29,7 @@ robot:
     velocity: 0.5
 
 segment:
-    batch_size: 8
+    batch_size: 1
     learning_rate: 0.00001
 
 pose: 
