@@ -60,13 +60,13 @@ if __name__ == '__main__':
 
     elif module_name == 'read_pose':
         from algorithm.read_pose import read
-        #from lib.module.read_pose2 import read as read2
+        from algorithm.read_pose2 import read as read2
         '''
         read_pose :  draw 6d-pose in three-deimnsional space
         read_pose2 : draw 6d-pose projection on an image plane
         '''
         read(config)
-        #read2(config)
+        read2(config)
 
 
     """    

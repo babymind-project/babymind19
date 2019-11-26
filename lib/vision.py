@@ -96,9 +96,10 @@ def np_cloud_transformer(depth, camera = 'zed', scale = 1.):
     
     grid = np.concatenate([x_, y_, f_],0)
     
-    depth=np.reshape(depth,[1,-1])
-    depth=np.tile(depth, [output_dim,1])
-    point_cloud=tf.multiply(depth, grid)
+    depth = np.reshape(depth,[1,-1])
+    depth = np.tile(depth, [output_dim,1])
+    point_cloud = np.multiply(depth, grid)
+    point_cloud = np.reshape(point_cloud, [height, width, output_dim])
     return point_cloud
 
 
