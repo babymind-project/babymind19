@@ -94,7 +94,7 @@ class Pose_stream(Batch_stream):
                 xi_vr_load = np.load(g_vr_path)
                 
                 img = preprocess_img(img_load, scale=scale)
-                depth, nan_mask= preprocess_depth(depth_load[:,:,2], scale=scale)
+                depth, nan_mask= preprocess_depth(depth_load, scale=scale)
                 mask = preprocess_mask(mask_load, scale=scale)
                 bbox = preprocess_bbox(depth_load, mask_load, scale = scale)
                 g_vr = se3_to_SE3(xi_vr_load)
