@@ -460,7 +460,7 @@ class Pose_network(Network):
             self._pc = 1e-1  
             self._d = 1e-2    
             self._recon = 1e-2 
-            self._v = 0 #1e1 
+            self._v = 1e1 
 
             loss_ =  self._p*photometric_loss_ + self._pc*pc_loss_ + self._recon*rgb_recover_loss_\
                         + self._d*depth_recover_loss_ +self._v*volume_loss_  
