@@ -32,7 +32,6 @@ def projection(T, intrinsic):
 def read(config): 
     task_name = config['task_name']
     nb_object = config['object']['nb_object']
-    supervision = config['pose']['supervision']
     scale = config['pose']['scale']
     fps = config['animation']['fps']
     pose_path = './output/'+task_name+'/pose'
