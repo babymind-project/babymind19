@@ -79,9 +79,9 @@ if __name__ == '__main__':
                 rgb_file = rgb_dir + '/' + str(ros_time).zfill(10)
                 cv_rgb = bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
                 cv2.imwrite(rgb_file+'.png', cv_rgb)
-                np.save(rgb_file+'.npy', cv_rgb)
-                # cv2.cvtColor(cv_rgb,cv2.COLOR_BGR2GRAY)
-
+                plt_rgb = cv2.cvtColor(cv_rgb,cv2.COLOR_BGR2GRAY)
+                np.save(rgb_file+'.npy', plt_rgb)
+                
             elif topic == '/zed/zed_node/depth/depth_registered':
                 depth_file = depth_dir + '/' + str(ros_time).zfill(10)
                 cv_depth = bridge.imgmsg_to_cv2(msg, desired_encoding='32FC1')

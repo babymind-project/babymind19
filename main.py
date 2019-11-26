@@ -32,6 +32,8 @@ if __name__ == '__main__':
     except:
         traceback.print_exc()
         print('type like: python3 ./main.py [task_name] [module_name]')
+    IPython.embed()
+    sys.exit()
     
     config = util.load_yaml('./configure/'+task_name+'.yaml')
     if module_name == 'preprocess' or module_name == 'pre':
@@ -46,19 +48,7 @@ if __name__ == '__main__':
             seg_net.test()
         else:
             seg_net.train(continuous = CONTINUOUS)
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
     elif module_name == 'pose':
         from lib.module.Pose_network import Pose_network
         pose_net = Pose_network(config, mode = 'default')
@@ -69,7 +59,8 @@ if __name__ == '__main__':
         else:
             pose_net.build()
             pose_net.train(continuous=CONTINUOUS)
-    
+
+    """    
     elif module_name == 'sfm_pose': # baseline1
         from lib.module.Sfm_pose_network import Sfm_pose_network
         pose_net = Sfm_pose_network(config, mode = 'default')
@@ -113,3 +104,4 @@ if __name__ == '__main__':
     elif module_name == 'ocisly':
         print('Of Course I Still Love You')
 
+    """

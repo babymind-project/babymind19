@@ -187,8 +187,8 @@ python3 = True if sys.hexversion > 0x03000000 else False
 import genpy
 import struct
 
-import std_msgs.msg
 import geometry_msgs.msg
+import std_msgs.msg
 
 class viconCalibrateSegmentResponse(genpy.Message):
   _md5sum = "fd8b451f9e0c65ec25938e0acbd102d7"
