@@ -29,11 +29,9 @@ from lib.preprocess import *
 from lib.learner import *
 
 class Pose_stream(Batch_stream):
-    def __init__(self, task_name, batch_size, scale = 1, mode = 'train', supervision = 'never'):
+    def __init__(self, task_name, batch_size, scale = 1, mode = 'train'):
         self.batch_size = batch_size
         self.mode = mode
-        self.supervision = supervision  # 'never', 'full', both_ends', ...
-        print('supervision'+colored(self.supervision,'blue'))
         self.img_dir = './data/'+task_name
         self.mask_dir = './output/'+task_name+'/segment'
         self.preprocess_dir = './.preprocess/'+task_name
@@ -96,7 +94,8 @@ class Pose_stream(Batch_stream):
                 img = preprocess_img(img_load, scale=scale)
                 depth, nan_mask= preprocess_depth(depth_load, scale=scale)
                 mask = preprocess_mask(mask_load, scale=scale)
-                bbox = preprocess_bbox(depth_load, mask_load, scale = scale)
+                #bbox = preprocess_bbox(depth_load, mask_load, scale = scale)
+                bbox = np.zeros(6)
                 g_vr = se3_to_SE3(xi_vr_load)
 
                 img = np.expand_dims(img, axis = 0)
@@ -202,7 +201,6 @@ class Pose_network(Network):
         self.mode = mode
         self.network_name = 'pose'
         self.task_name = config['task_name']
-        self.supervision = config['pose']['supervision']
         self.scale = config['pose']['scale']
         self.batch_size = config['pose']['batch_size']  
         self.learning_rate = config['pose']['learning_rate']
@@ -461,7 +459,7 @@ class Pose_network(Network):
             self._pc = 1e-1  
             self._d = 1e-2    
             self._recon = 1e-2 
-            self._v = 1e1 
+            self._v = 0 #1e1 
 
             loss_ =  self._p*photometric_loss_ + self._pc*pc_loss_ + self._recon*rgb_recover_loss_\
                         + self._d*depth_recover_loss_ +self._v*volume_loss_  
@@ -533,7 +531,7 @@ class Pose_network(Network):
         scale = self.scale
 
         saver.restore(sess, self.weight_dir+'/u_net.ckpt')
-        pose_stream = Pose_stream(task_name, batch_size, scale, mode = 'test', supervision = self.supervision)
+        pose_stream = Pose_stream(task_name, batch_size, scale, mode = 'test')
         demo_list = pose_stream.demo_list
         batch_iter = pose_stream.iterator(batch_size = batch_size)
         writer = Writer(task_name, self.network_name+'_test')
@@ -623,7 +621,7 @@ class Pose_network(Network):
         batch_size = self.batch_size
         scale = self.scale
 
-        pose_stream = Pose_stream(task_name, batch_size, scale, supervision = self.supervision)
+        pose_stream = Pose_stream(task_name, batch_size, scale)
         batch_iter = pose_stream.iterator(batch_size = batch_size)
         
         util.create_dir(self.weight_dir)
