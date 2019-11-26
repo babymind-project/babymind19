@@ -61,7 +61,7 @@ def read(config):
         se30 = se3_traj[ref_frame,obj_idx,:]
         mask0 = np.load(mask_files[ref_frame])
         depth0 = np.load(depth_files[ref_frame]) 
-        depth0 = cv2.cv2.resize(depth0, None, fx=scale, fy=scale)
+        depth0 = cv2.resize(depth0, None, fx=scale, fy=scale)
         pc0 = vision.np_cloud_transformer(depth0, 'zed', scale = scale)
 
         init_R = se3_to_SE3(se30)[0:3,0:3]

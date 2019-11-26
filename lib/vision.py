@@ -93,13 +93,13 @@ def np_cloud_transformer(depth, camera = 'zed', scale = 1.):
     
     x_= np.expand_dims(np.divide(x_cord, fx) ,0)
     y_= np.expand_dims(np.divide(y_cord, fy) ,0)
-    
     grid = np.concatenate([ x_, y_, f_],0)
 
     depth = np.reshape(depth,[1,-1])
     depth = np.tile(depth, [output_dim,1])
     point_cloud = np.multiply(depth, grid)
-    point_cloud = np.reshape(point_cloud, [height, width, output_dim])
+    point_cloud = np.reshape(point_cloud, [output_dim, height, width])
+    point_cloud = np.transpose(point_cloud, [1,2,0])
     return point_cloud
 
 
@@ -681,7 +681,7 @@ class SE3object():
         ax.plot(zbar[0,:], zbar[1,:], zbar[2,:], color='b', linewidth = linewidth)
 
 
-def get_com(mask, depth, obj_idx, init_R = np.eye(3), scale = 0.5):
+def get_com(mask, depth, obj_idx, init_R = np.eye(3)):
     h = mask.shape[0]
     w = mask.shape[1]
 
