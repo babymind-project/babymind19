@@ -14,8 +14,8 @@ animation:
 
 preprocess:
     skip_frame: NotImplemented
-    image_size: [360, 640]
-    scale : 0.5
+    image_size: [270, 480]
+    scale : 0.375
     
 
 
