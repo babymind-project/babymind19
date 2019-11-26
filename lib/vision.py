@@ -64,7 +64,7 @@ class Cloud_transformer():
     def __init__(self, intrinsic='zed', scale=1., **kwargs):
         ## set intrinsic 
         if intrinsic == 'zed':
-            self.intrinsic = Zed_intrinsic()
+            self.intrinsic = Zed_intrinsic(scale)
         elif intrinsic == 'zed_mini':
             self.intrinsic = Zed_mini_intrinsic(scale)
         ## initialize
@@ -331,7 +331,7 @@ class Optical_transformer():
     def __init__(self, intrinsic='zed', scale = 1., mask_ch = 1, input_type = 'sined_euler', **kwargs):
         ## set intrinsic 
         if intrinsic == 'zed':
-            self.intrinsic = Zed_intrinsic()
+            self.intrinsic = Zed_intrinsic(scale)
         elif intrinsic == 'zed_mini':
             self.intrinsic = Zed_mini_intrinsic(scale)
         ## initialize
@@ -349,8 +349,6 @@ class Optical_transformer():
         self.img_h=self.intrinsic.h
         self.mask_size = mask_ch
         self.input_type = input_type
-        IPython.embed()
-        
         so3_a=np.array([
             [0,-1,0,1,0,0,0,0,0],
             [1,0,0,0,1,0,0,0,0],
