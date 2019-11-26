@@ -35,6 +35,7 @@ class Pose_stream(Batch_stream):
         self.img_dir = './data/'+task_name
         self.mask_dir = './output/'+task_name+'/segment'
         self.preprocess_dir = './.preprocess/'+task_name
+        self.scale = scale
 
         self.num_data = 0
         self._count = 0
@@ -115,7 +116,9 @@ class Pose_stream(Batch_stream):
                 mask_img = multichannel_to_image(mask[0,:])
                 np.save(preprocess_mask_img_dir+'/%s.png'%str(index).zfill(10), mask_img)
                 index+=1
-            
+                IPython.embed()
+                sys.exit()
+                
             self.img_preprocess_dict[demo] = sorted(glob.glob(preprocess_img_dir+'/*.npy'))
             self.depth_preprocess_dict[demo] = sorted(glob.glob(preprocess_depth_dir+'/*.npy'))
             self.nan_mask_preprocess_dict[demo] = sorted(glob.glob(preprocess_nan_mask_dir+'/*.npy'))

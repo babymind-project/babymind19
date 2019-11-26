@@ -17,7 +17,14 @@ preprocess:
     image_size: [270, 480]
     scale : 0.375
     
+segment:
+    batch_size: 1
+    learning_rate: 0.00001
 
+pose: 
+    batch_size : 1
+    scale : 0.375
+    learning_rate: 0.00001 
 
 
 
@@ -28,15 +35,7 @@ robot:
     acceleration: 0.3 #0.9
     velocity: 0.5
 
-segment:
-    batch_size: 1
-    learning_rate: 0.00001
 
-pose: 
-    batch_size : 1
-    scale : 0.375
-    supervision : 'never' #'never' #'full' #'both_ends'
-    learning_rate: 0.00001 
 
 discriminator:
     learning_rate: 0.0001
