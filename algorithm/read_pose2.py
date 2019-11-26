@@ -88,7 +88,7 @@ def read(config):
 
                 se3 = SE3_to_se3(SE3)
                 obj.apply_pose(se3)
-                s = 0.1 *10
+                s = 0.01 *10
 
                 scaled_xbasis = 0.1*(obj.xbasis-obj.orientation)+obj.orientation
                 scaled_ybasis = 0.1*(obj.ybasis-obj.orientation)+obj.orientation
