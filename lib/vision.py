@@ -89,14 +89,14 @@ def np_cloud_transformer(depth, camera = 'zed', scale = 1.):
     x_cord, y_cord = np.meshgrid(x_linspace, y_linspace)
     x_cord = np.reshape(x_cord,[-1])
     y_cord = np.reshape(y_cord,[-1])
-    f_= np.ones_like(x_cord)
+    f_= np.expand_dims(np.ones_like(x_cord) ,0)
     
-    x_=np.divide(x_cord, fx)
-    y_=np.divide(y_cord, fy)
+    x_= np.expand_dims(np.divide(x_cord, fx) ,0)
+    y_= np.expand_dims(np.divide(y_cord, fy) ,0)
     
-    grid = np.concatenate([x_, y_, f_],0)
+    grid = np.concatenate([ x_, y_, f_],0)
     IPython.embed()
-    
+
     depth = np.reshape(depth,[1,-1])
     depth = np.tile(depth, [output_dim,1])
     point_cloud = np.multiply(depth, grid)
