@@ -38,7 +38,7 @@ def read(config):
     pose_path = './output/'+task_name+'/pose'
     
     data_dir = './data/'+task_name
-    output_dir = './output/'+task_name'/read_pose2'
+    output_dir = './output/'+task_name+'/read_pose2'
     se3_dict = np.load(pose_path+'/se3_pose.npy', allow_pickle = True).item()
     
     obj = vision.SE3object(np.zeros(6), angle_type = 'axis')
