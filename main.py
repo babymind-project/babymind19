@@ -48,7 +48,7 @@ if __name__ == '__main__':
             seg_net.train(continuous = CONTINUOUS)
     
     elif module_name == 'pose':
-        from lib.module.Pose_network import Pose_network
+        from algorithm.Pose_network import Pose_network
         pose_net = Pose_network(config, mode = 'default')
         if TEST:
             pose_net.batch_size = 1
