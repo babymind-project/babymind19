@@ -37,14 +37,15 @@ class Intrinsic():
         pass
         
 class Zed_intrinsic(Intrinsic):
-    def __init__(self):
-        self.w = 672
-        self.h = 376
+    def __init__(self, scale = 1.):
+        self.w = int(1280*scale)
+        self.h = int(720*scale)
         self.f = 336.11279
-        self.fx = self.f/self.w
-        self.fy = self.f/self.h
-        self.cx = (338.79229/self.w) 
-        self.cy = (196.26330/self.h)
+        self.fx = (self.f/self.w)*scale
+        self.fy = (self.f/self.h)*scale
+        
+        self.cx = (338.79229/self.w)*scale
+        self.cy = (196.26330/self.h)*scale
 
 class Zed_mini_intrinsic(Intrinsic):
     def __init__(self, scale = 1.):

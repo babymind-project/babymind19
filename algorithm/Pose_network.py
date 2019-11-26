@@ -345,8 +345,8 @@ class Pose_network(Network):
             g_vr1_ph = tf.placeholder(dtype = tf.float32, shape = (None, 4, 4))
 
             # used vision module
-            cloud_transformer = vision.Cloud_transformer(intrinsic = 'zed_mini', scale = 1)    
-            optical_transformer = vision.Optical_transformer(intrinsic='zed_mini', scale = 1, mask_ch = mask_ch+1, input_type ='SO3')
+            cloud_transformer = vision.Cloud_transformer(intrinsic = 'zed', scale = scale)    
+            optical_transformer = vision.Optical_transformer(intrinsic='zed', scale = scale, mask_ch = mask_ch+1, input_type ='SO3')
             image_warper_backward = vision.Image_warper_backward()
 
             # sensor depth to full depth
