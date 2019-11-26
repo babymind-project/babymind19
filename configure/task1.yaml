@@ -14,8 +14,8 @@ animation:
 
 preprocess:
     skip_frame: NotImplemented
-    image_size: [270, 480]
-    scale : 0.375
+    image_size: [180, 320]
+    scale : 0.25
     
 segment:
     batch_size: 1
@@ -23,7 +23,7 @@ segment:
 
 pose: 
     batch_size : 1
-    scale : 0.375
+    scale : 0.25
     learning_rate: 0.00001 
 
 
