@@ -681,7 +681,7 @@ class SE3object():
         ax.plot(zbar[0,:], zbar[1,:], zbar[2,:], color='b', linewidth = linewidth)
 
 
-def get_com(mask, depth, obj_idx, init_R = np.eye(3), scale = 0.5):
+def get_com(mask, depth, obj_idx, intrinsic, init_R = np.eye(3), scale = 0.5):
     h = mask.shape[0]
     w = mask.shape[1]
 
@@ -701,11 +701,11 @@ def get_com(mask, depth, obj_idx, init_R = np.eye(3), scale = 0.5):
     column_cg = int(column_cg)
     #print('('+str(row_cg)+','+str(column_cg)+')' )
     
-    fo = 335.9676513671875
-    ho = 376 * scale
-    wo = 672 * scale
+    #fo = intrinsic.f
+    #ho = 376 * scale
+    #wo = 672 * scale
     
-    T = depth[row_cg,column_cg,:]/1000
+    T = depth[row_cg,column_cg,:]
     T[0] = T[0]#*(fo/wo)
     T[1] = T[1]#*(fo/ho)
     T[2] = T[2]

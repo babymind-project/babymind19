@@ -64,7 +64,7 @@ def read(config):
         pc0 = vision.np_cloud_transformer(depth0, 'zed', scale = scale)
 
         init_R = se3_to_SE3(se30)[0:3,0:3]
-        com = vision.get_com(mask0, pc0, obj_idx, init_R = init_R)
+        com = vision.get_com(mask0, pc0, obj_idx, init_R = init_R, scale = scale)
 
         g_c_com = se3_to_SE3(com)
         g_co = se3_to_SE3(se30)
