@@ -35,7 +35,8 @@ class Pose_stream(Batch_stream):
         self.img_dir = './data/'+task_name
         self.mask_dir = './output/'+task_name+'/segment'
         self.preprocess_dir = './.preprocess/'+task_name
-
+        scale = 1 
+        
         self.num_data = 0
         self._count = 0
 
