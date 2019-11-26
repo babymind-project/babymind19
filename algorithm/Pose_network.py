@@ -244,7 +244,7 @@ class Pose_network(Network):
         h = self.img_size[0]
         w = self.img_size[1]
         ch = self.mask_ch
-        CLIP = True
+        CLIP = False
 
         motion = tf.reshape(motion_map, [-1,ch+1,3,h,w]) 
         motion = tf.transpose(motion, [0, 1, 3, 4, 2])
