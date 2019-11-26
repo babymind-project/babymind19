@@ -57,11 +57,10 @@ class Pose_stream(Batch_stream):
         for demo in self.demo_list:
             img_demo_dir = self.img_dir+'/'+demo
             mask_demo_dir = self.mask_dir +'/'+demo
-            vicon_demo_dir = self.vicon_dir+'/'+demo
             self.img_dict[demo] = sorted(glob.glob(img_demo_dir+'/rgb/*.npy'))
             self.depth_dict[demo] = sorted(glob.glob(img_demo_dir+'/depth/*.npy'))
             self.mask_dict[demo] = sorted(glob.glob(mask_demo_dir+'/*.npy'))
-            self.g_vr_dict[demo] = sorted(glob.glob(vicon_demo_dir+'/vicon/k_zed/*.npy'))
+            self.g_vr_dict[demo] = sorted(glob.glob(img_demo_dir+'/vicon/k_zed/*.npy'))
 
         for demo in self.demo_list:
             img_list = self.img_dict[demo]
