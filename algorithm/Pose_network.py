@@ -96,7 +96,7 @@ class Pose_stream(Batch_stream):
                 depth, nan_mask= preprocess_depth(depth_load, scale=scale)
                 mask = preprocess_mask(mask_load, scale=1)
                 #bbox = preprocess_bbox(depth_load, mask_load, scale = scale)
-                bbox = np.zeros(6)
+                bbox = np.zeros((1,6))
                 g_vr = se3_to_SE3(xi_vr_load)
 
                 img = np.expand_dims(img, axis = 0)
