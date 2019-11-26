@@ -209,7 +209,6 @@ class Pose_network(Network):
         self.depth_min = config['camera']['depth_min']
         ###
         self.img_size =  config['preprocess']['image_size']
-        self.img_size = [int(i*self.scale) for i in self.img_size]
         self.mask_ch = config['object']['nb_object']
 
         self.weight_dir = './weight/'+self.task_name+'/'+self.network_name
