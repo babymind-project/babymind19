@@ -111,6 +111,8 @@ def read(config):
                 ########################################
                 ax.set_xlim([0, intrinsic.w])
                 ax.set_ylim([intrinsic.h,0])
+                IPython.embed()
+                sys.exit()
 
             fig.savefig(output_path+'/%s.png'%str(t).zfill(10))
         video_path = output_path+'/se3_on_image.avi'
