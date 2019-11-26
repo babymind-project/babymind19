@@ -68,7 +68,7 @@ def read(config):
         com = vision.get_com(mask0, pc0, obj_idx, init_R = init_R)
 
         g_c_com = se3_to_SE3(com)
-        g_co = se3_to_SdE3(se30)
+        g_co = se3_to_SE3(se30)
         g_oc = inv_SE3(g_co)
         g_o_com = np.matmul(g_oc, g_c_com)
         
