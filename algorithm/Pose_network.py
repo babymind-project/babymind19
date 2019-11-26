@@ -35,8 +35,7 @@ class Pose_stream(Batch_stream):
         self.img_dir = './data/'+task_name
         self.mask_dir = './output/'+task_name+'/segment'
         self.preprocess_dir = './.preprocess/'+task_name
-        scale = 1 
-        
+
         self.num_data = 0
         self._count = 0
 
@@ -94,7 +93,7 @@ class Pose_stream(Batch_stream):
                 
                 img = preprocess_img(img_load, scale=scale)
                 depth, nan_mask= preprocess_depth(depth_load, scale=scale)
-                mask = preprocess_mask(mask_load, scale=scale)
+                mask = preprocess_mask(mask_load, scale=1)
                 #bbox = preprocess_bbox(depth_load, mask_load, scale = scale)
                 bbox = np.zeros(6)
                 g_vr = se3_to_SE3(xi_vr_load)
