@@ -99,7 +99,9 @@ class Pose_stream(Batch_stream):
                 pc = vision.np_cloud_transformer(depth, 'zed', scale = scale)
                 bbox = preprocess_bbox(pc, mask_load, scale = scale)
                 g_vr = se3_to_SE3(xi_vr_load)
-
+                IPython.embed()
+                sys.exit()
+                
                 img = np.expand_dims(img, axis = 0)
                 depth = np.expand_dims(depth, axis = 0)
                 mask = np.expand_dims(mask, axis = 0)
