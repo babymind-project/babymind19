@@ -100,8 +100,6 @@ class Pose_stream(Batch_stream):
                 pc = vision.np_cloud_transformer(depth, self.camera, scale = scale)
                 bbox = preprocess_bbox(pc, mask_load, scale = scale)
                 g_vr = se3_to_SE3(xi_vr_load)
-                IPython.embed()
-                sys.exit()
                 
                 img = np.expand_dims(img, axis = 0)
                 depth = np.expand_dims(depth, axis = 0)
@@ -249,7 +247,7 @@ class Pose_network(Network):
         h = self.img_size[0]
         w = self.img_size[1]
         ch = self.mask_ch
-        CLIP = False
+        CLIP = True
 
         motion = tf.reshape(motion_map, [-1,ch+1,3,h,w]) 
         motion = tf.transpose(motion, [0, 1, 3, 4, 2])
