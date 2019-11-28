@@ -31,6 +31,7 @@ def projection(T, intrinsic):
 
 def read(config): 
     task_name = config['task_name']
+    camera = config['camera']
     nb_object = config['object']['nb_object']
     scale = config['pose']['scale']
     fps = config['animation']['fps']
@@ -41,8 +42,12 @@ def read(config):
     se3_dict = np.load(pose_path+'/se3_pose.npy', allow_pickle = True).item()
     
     obj = vision.SE3object(np.zeros(6), angle_type = 'axis')
-    intrinsic = vision.Zed_intrinsic(scale = scale)
-    
+
+    if camera == 'zed':
+        intrinsic = vision.Zed_intrinsic(scale = scale)
+    elif camera == 'zed_mini':
+        intrinsic = vision.Zed_mini_intrinsic(scale = scale)
+
     fig = plt.figure()
     ax = fig.add_subplot(111)
 
@@ -62,7 +67,7 @@ def read(config):
         mask0 = np.load(mask_files[ref_frame])
         depth0 = np.load(depth_files[ref_frame]) 
         depth0 = cv2.resize(depth0, None, fx=scale, fy=scale)
-        pc0 = vision.np_cloud_transformer(depth0, 'zed', scale = scale)
+        pc0 = vision.np_cloud_transformer(depth0, camera, scale = scale)
 
         init_R = se3_to_SE3(se30)[0:3,0:3]
         com = vision.get_com(mask0, pc0, obj_idx, init_R = init_R)

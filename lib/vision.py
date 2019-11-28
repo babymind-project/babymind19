@@ -60,7 +60,7 @@ class Zed_mini_intrinsic(Intrinsic):
         
 
 ## vision algorithm
-def np_cloud_transformer(depth, camera = 'zed', scale = 1.):
+def np_cloud_transformer(depth, camera = 'zed_mini', scale = 1.):
     '''
     depth: [h,w]
 
@@ -105,7 +105,7 @@ def np_cloud_transformer(depth, camera = 'zed', scale = 1.):
 
 
 class Cloud_transformer():
-    def __init__(self, intrinsic='zed', scale=1., **kwargs):
+    def __init__(self, intrinsic='zed_mini', scale=1., **kwargs):
         ## set intrinsic 
         if intrinsic == 'zed':
             self.intrinsic = Zed_intrinsic(scale)
@@ -372,7 +372,7 @@ class Image_warper_forward():
 
 
 class Optical_transformer():
-    def __init__(self, intrinsic='zed', scale = 1., mask_ch = 1, input_type = 'sined_euler', **kwargs):
+    def __init__(self, intrinsic='zed_mini', scale = 1., mask_ch = 1, input_type = 'sined_euler', **kwargs):
         ## set intrinsic 
         if intrinsic == 'zed':
             self.intrinsic = Zed_intrinsic(scale)

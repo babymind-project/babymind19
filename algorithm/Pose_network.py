@@ -29,9 +29,10 @@ from lib.preprocess import *
 from lib.learner import *
 
 class Pose_stream(Batch_stream):
-    def __init__(self, task_name, batch_size, scale = 1, mode = 'train'):
+    def __init__(self, task_name, batch_size, camera = 'zed_mini', scale = 1, mode = 'train'):
         self.batch_size = batch_size
         self.mode = mode
+        self.camera = camera
         self.img_dir = './data/'+task_name
         self.mask_dir = './output/'+task_name+'/segment'
         self.preprocess_dir = './.preprocess/'+task_name
@@ -96,7 +97,7 @@ class Pose_stream(Batch_stream):
                 depth, nan_mask= preprocess_depth(depth_load, scale=scale)
                 mask = preprocess_mask(mask_load, scale=1)
                 
-                pc = vision.np_cloud_transformer(depth, 'zed', scale = scale)
+                pc = vision.np_cloud_transformer(depth, self.camera, scale = scale)
                 bbox = preprocess_bbox(pc, mask_load, scale = scale)
                 g_vr = se3_to_SE3(xi_vr_load)
                 IPython.embed()
@@ -208,7 +209,8 @@ class Pose_network(Network):
         self.scale = config['pose']['scale']
         self.batch_size = config['pose']['batch_size']  
         self.learning_rate = config['pose']['learning_rate']
-
+        
+        self.camera = config['camera']['camera']
         self.depth_max = config['camera']['depth_max']
         self.depth_min = config['camera']['depth_min']
         ###
@@ -348,8 +350,8 @@ class Pose_network(Network):
             g_vr1_ph = tf.placeholder(dtype = tf.float32, shape = (None, 4, 4))
 
             # used vision module
-            cloud_transformer = vision.Cloud_transformer(intrinsic = 'zed', scale = scale)    
-            optical_transformer = vision.Optical_transformer(intrinsic='zed', scale = scale, mask_ch = mask_ch+1, input_type ='SO3')
+            cloud_transformer = vision.Cloud_transformer(intrinsic = self.camera, scale = scale)    
+            optical_transformer = vision.Optical_transformer(intrinsic = self.camera, scale = scale, mask_ch = mask_ch+1, input_type ='SO3')
             image_warper_backward = vision.Image_warper_backward()
 
             # sensor depth to full depth
@@ -534,7 +536,7 @@ class Pose_network(Network):
         scale = self.scale
 
         saver.restore(sess, self.weight_dir+'/u_net.ckpt')
-        pose_stream = Pose_stream(task_name, batch_size, scale, mode = 'test')
+        pose_stream = Pose_stream(task_name, batch_size, camera = self.camera, scale = scale, mode = 'test')
         demo_list = pose_stream.demo_list
         batch_iter = pose_stream.iterator(batch_size = batch_size)
         writer = Writer(task_name, self.network_name+'_test')
@@ -624,7 +626,7 @@ class Pose_network(Network):
         batch_size = self.batch_size
         scale = self.scale
 
-        pose_stream = Pose_stream(task_name, batch_size, scale)
+        pose_stream = Pose_stream(task_name, batch_size, camera = self.camera, scale = scale)
         batch_iter = pose_stream.iterator(batch_size = batch_size)
         
         util.create_dir(self.weight_dir)
