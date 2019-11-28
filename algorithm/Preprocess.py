@@ -74,11 +74,6 @@ def preprocess(config):
     fps = config['animation']['fps']
     
     ## 1. resize image
-    data_dir = './data/'+task_name
-    demos = sorted(os.listdir(data_dir))
-    for demo_name in demos:
-        rgb_dir = data_dir +'/'+demo_name +'/rgb'
-        depth_dir = data_dir+'/'+demo_name+'/depth'
 
 
     ## 2. generate mask from json
