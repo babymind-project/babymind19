@@ -79,7 +79,7 @@ if __name__ == '__main__':
                 rgb_file = rgb_dir + '/' + str(ros_time).zfill(10)
                 cv_rgb = bridge.imgmsg_to_cv2(msg, desired_encoding='bgr8')
                 cv2.imwrite(rgb_file+'.png', cv_rgb)
-                plt_rgb = cv2.cvtColor(cv_rgb,cv2.COLOR_BGR2GRAY)
+                plt_rgb = cv_rgb[:,:,::-1]
                 np.save(rgb_file+'.npy', plt_rgb)
                 
             elif topic == '/zed/zed_node/depth/depth_registered':
@@ -91,7 +91,7 @@ if __name__ == '__main__':
                 plt.close()
                 #cv2.imwrite(depth_file+'.png', cv_depth)
                 np.save(depth_file+'.npy', cv_depth)
-                
+
             elif topic in vicon_topics:
                 obj_name = os.path.basename(topic)
                 vicon_file = vicon_dir + '/' + obj_name+'/'+str(ros_time).zfill(10)

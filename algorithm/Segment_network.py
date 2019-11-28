@@ -96,7 +96,7 @@ class Segnet_stream(Batch_stream):
             for demo in self.demo_list:
                 img_list = self.img_dict[demo]
                 depth_list = self.depth_dict[demo]
-                for img_path, depth_path in zip(img_list,depth_list):
+                for img_path, depth_path in zip(img_list, depth_list):
                     img = np.load(img_path)
                     depth = np.load(depth_path)#[:,:,2]
                     
@@ -107,8 +107,6 @@ class Segnet_stream(Batch_stream):
                     depth = np.expand_dims(depth, axis = 0)
                     mask = None
                     self.count +=1
-                    IPython.embed()
-                    sys.exit()
                     yield img, depth, mask, demo
 
 
