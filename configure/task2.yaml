@@ -18,11 +18,11 @@ preprocess:
     scale : 0.5
     
 segment:
-    batch_size: 1
+    batch_size: 8
     learning_rate: 0.00001
 
 pose: 
-    batch_size : 1
+    batch_size : 8
     scale : 0.5
     learning_rate: 0.00001 
 
