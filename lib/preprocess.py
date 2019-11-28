@@ -22,8 +22,8 @@ def preprocess_depth(depth, scale = 0.5):
     
     copyed[np.where(np.isnan(copyed))] = DEPTH_MIN/1000
     copyed[np.where(np.isinf(copyed))] = DEPTH_MAX/1000
-    copyed[np.where(copyed<DEPTH_MIN)] = DEPTH_MIN/1000
-    copyed[np.where(copyed>DEPTH_MAX)] = DEPTH_MAX/1000
+    copyed[np.where(copyed<DEPTH_MIN/1000)] = DEPTH_MIN/1000
+    copyed[np.where(copyed>DEPTH_MAX/1000)] = DEPTH_MAX/1000
 
     copyed = copyed#/1000
     return copyed, nan_mask
