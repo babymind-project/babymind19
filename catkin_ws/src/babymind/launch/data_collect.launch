@@ -1,4 +1,4 @@
 <launch>
 	<include file="$(find vicon_bridge)/launch/vicon.launch" />
-        <include file="$(find zed_wrapper)/launch/zed.launch" />
+        <include file="$(find zed_wrapper)/launch/zedm.launch" />
 </launch>

@@ -12,7 +12,7 @@ def preprocess_img(img, scale = 0.5):
     copyed = copyed/255.
     return copyed
 
-def preprocess_depth(depth, scale = 0.5):
+def preprocess_depth(depth, scallse = 0.5):
     depth = cv2.resize(depth, None, fx=scale, fy=scale)
     
     copyed = np.copy(depth)

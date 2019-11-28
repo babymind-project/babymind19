@@ -73,7 +73,15 @@ def reduce_classids(class_ids, class_names, using_class):
 def preprocess(config):   
     fps = config['animation']['fps']
     
-    ## 1. generate mask from json
+    ## 1. resize image
+    data_dir = './data/'+task_name
+    demos = sorted(os.listdir(data_dir))
+    for demo_name in demos:
+        rgb_dir = data_dir +'/'+demo_name +'/rgb'
+        depth_dir = data_dir+'/'+demo_name+'/depth'
+
+
+    ## 2. generate mask from json
     task_name = config['task_name']
     object_file = './configure/'+task_name+'_objects.txt'
     class_names = util.load_txt(object_file)
@@ -133,4 +141,3 @@ def preprocess(config):
                 np.save(mask_dir+'/%04d.npy'%image_id, label)
                 count += 1
     
-    ## 2. resize image

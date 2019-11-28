@@ -85,7 +85,11 @@ if __name__ == '__main__':
             elif topic == '/zed/zed_node/depth/depth_registered':
                 depth_file = depth_dir + '/' + str(ros_time).zfill(10)
                 cv_depth = bridge.imgmsg_to_cv2(msg, desired_encoding='32FC1')
-                cv2.imwrite(depth_file+'.png', cv_depth)
+                plt.close()
+                plt.imshow(cv_depth)
+                plt.savefig(depth_file+'.png')
+                plt.close()
+                #cv2.imwrite(depth_file+'.png', cv_depth)
                 np.save(depth_file+'.npy', cv_depth)
                 
             elif topic in vicon_topics:
@@ -119,9 +123,7 @@ if __name__ == '__main__':
         end = input(colored('where to end? [enter number as type of nanoseconds]'))
         begin = int(begin)
         end = int(end)
-        #begin = 1574235759746797435
-        #end = 1574235760578664782
-
+        
         ## extract rgb
         rgb_time = []
         for rgb_path in sorted(glob.glob(rgb_source_dir+'/*.npy')):
@@ -194,7 +196,7 @@ if __name__ == '__main__':
                 v1_time = int(v1_no_ext)
                 v2_time = int(v2_no_ext)
 
-                if v1_time <= rgb_time[indicator] <= v2_time:
+                if rgb_time[indicator] <= v2_time:
                     if rgb_time[indicator] - v1_time <= v2_time- rgb_time[indicator]:
                         copy_file_no_ext = v1_no_ext
                     else:
@@ -206,12 +208,13 @@ if __name__ == '__main__':
 
                     indicator += 1
                     vicon_time.append(int(copy_file_no_ext))
+                    print('v1:',v1,'v2:',v2, 'rgb:',rgb_time[indicator-1], 'indicator',indicator)
                 else:
                     pass
 
                 if indicator >= len(rgb_time):
                     break
-
+                    
         ## save image animation
         config = util.load_yaml('./configure/'+task_name+'.yaml')
         fps = config['animation']['fps']
