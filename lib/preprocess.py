@@ -3,8 +3,8 @@ import IPython
 import numpy as np
 import scipy
 
-DEPTH_MIN = 50
-DEPTH_MAX = 20000
+DEPTH_MIN = 50/1000
+DEPTH_MAX = 20000/1000
 
 def preprocess_img(img, scale = 0.5):
     img = cv2.resize(img,None, fx=scale, fy = scale)
@@ -20,10 +20,10 @@ def preprocess_depth(depth, scale = 0.5):
     nan_mask = np.zeros_like(copyed)
     nan_mask[np.where(np.isnan(copyed))] = 1
     
-    copyed[np.where(np.isnan(copyed))] = DEPTH_MIN/1000
-    copyed[np.where(np.isinf(copyed))] = DEPTH_MAX/1000
-    copyed[np.where(copyed<DEPTH_MIN/1000)] = DEPTH_MIN/1000
-    copyed[np.where(copyed>DEPTH_MAX/1000)] = DEPTH_MAX/1000
+    copyed[np.where(np.isnan(copyed))] = DEPTH_MIN
+    copyed[np.where(np.isinf(copyed))] = DEPTH_MAX
+    copyed[np.where(copyed<DEPTH_MIN)] = DEPTH_MIN
+    copyed[np.where(copyed>DEPTH_MAX)] = DEPTH_MAX
 
     copyed = copyed#/1000
     return copyed, nan_mask
