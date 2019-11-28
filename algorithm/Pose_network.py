@@ -120,6 +120,7 @@ class Pose_stream(Batch_stream):
                 mask_img = multichannel_to_image(mask[0,:])
                 np.save(preprocess_mask_img_dir+'/%s.png'%str(index).zfill(10), mask_img)
                 index+=1
+                IPython.embed()
 
             self.img_preprocess_dict[demo] = sorted(glob.glob(preprocess_img_dir+'/*.npy'))
             self.depth_preprocess_dict[demo] = sorted(glob.glob(preprocess_depth_dir+'/*.npy'))
