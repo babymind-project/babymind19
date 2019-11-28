@@ -107,6 +107,8 @@ class Segnet_stream(Batch_stream):
                     depth = np.expand_dims(depth, axis = 0)
                     mask = None
                     self.count +=1
+                    IPython.embed()
+                    sys.exit()
                     yield img, depth, mask, demo
 
 
