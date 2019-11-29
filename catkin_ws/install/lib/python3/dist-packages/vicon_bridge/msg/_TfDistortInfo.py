@@ -305,12 +305,6 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_id = None
-def _get_struct_id():
-    global _struct_id
-    if _struct_id is None:
-        _struct_id = struct.Struct("<id")
-    return _struct_id
 _struct_10d = None
 def _get_struct_10d():
     global _struct_10d
@@ -323,3 +317,9 @@ def _get_struct_d():
     if _struct_d is None:
         _struct_d = struct.Struct("<d")
     return _struct_d
+_struct_id = None
+def _get_struct_id():
+    global _struct_id
+    if _struct_id is None:
+        _struct_id = struct.Struct("<id")
+    return _struct_id

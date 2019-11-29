@@ -179,8 +179,8 @@ python3 = True if sys.hexversion > 0x03000000 else False
 import genpy
 import struct
 
-import std_msgs.msg
 import geometry_msgs.msg
+import std_msgs.msg
 
 class viconGrabPoseResponse(genpy.Message):
   _md5sum = "236213ed6979c1ab1c49bd1bc04ace9e"
@@ -374,18 +374,18 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_7d = None
-def _get_struct_7d():
-    global _struct_7d
-    if _struct_7d is None:
-        _struct_7d = struct.Struct("<7d")
-    return _struct_7d
 _struct_B3I = None
 def _get_struct_B3I():
     global _struct_B3I
     if _struct_B3I is None:
         _struct_B3I = struct.Struct("<B3I")
     return _struct_B3I
+_struct_7d = None
+def _get_struct_7d():
+    global _struct_7d
+    if _struct_7d is None:
+        _struct_7d = struct.Struct("<7d")
+    return _struct_7d
 class viconGrabPose(object):
   _type          = 'vicon_bridge/viconGrabPose'
   _md5sum = '396f27028ccc2718b2991cabdc1af144'

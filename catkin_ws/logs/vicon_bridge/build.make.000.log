@@ -1,21 +1,21 @@
 [35m[1mScanning dependencies of target testclient[0m
-[  2%] [32mBuilding CXX object CMakeFiles/testclient.dir/src/ViconDataStreamSDK_CPPTest.cpp.o[0m
-[  5%] [32m[1mLinking CXX executable /home/k/Desktop/git_repository/babymind19/catkin_ws/devel/.private/vicon_bridge/lib/vicon_bridge/testclient[0m
-[  5%] Built target testclient
-[35m[1mScanning dependencies of target geometry_msgs_generate_messages_cpp[0m
-[  5%] Built target geometry_msgs_generate_messages_cpp
 [35m[1mScanning dependencies of target _vicon_bridge_generate_messages_check_deps_viconCalibrateSegment[0m
-[  5%] Built target _vicon_bridge_generate_messages_check_deps_viconCalibrateSegment
+[  2%] [32mBuilding CXX object CMakeFiles/testclient.dir/src/ViconDataStreamSDK_CPPTest.cpp.o[0m
+[  2%] Built target _vicon_bridge_generate_messages_check_deps_viconCalibrateSegment
 [35m[1mScanning dependencies of target _vicon_bridge_generate_messages_check_deps_Marker[0m
-[  5%] Built target _vicon_bridge_generate_messages_check_deps_Marker
+[  2%] Built target _vicon_bridge_generate_messages_check_deps_Marker
 [35m[1mScanning dependencies of target _vicon_bridge_generate_messages_check_deps_viconGrabPose[0m
-[  5%] Built target _vicon_bridge_generate_messages_check_deps_viconGrabPose
+[  2%] Built target _vicon_bridge_generate_messages_check_deps_viconGrabPose
 [35m[1mScanning dependencies of target _vicon_bridge_generate_messages_check_deps_Markers[0m
-[  5%] Built target _vicon_bridge_generate_messages_check_deps_Markers
+[  2%] Built target _vicon_bridge_generate_messages_check_deps_Markers
 [35m[1mScanning dependencies of target _vicon_bridge_generate_messages_check_deps_TfDistortInfo[0m
-[  5%] Built target _vicon_bridge_generate_messages_check_deps_TfDistortInfo
+[  2%] Built target _vicon_bridge_generate_messages_check_deps_TfDistortInfo
+[35m[1mScanning dependencies of target geometry_msgs_generate_messages_cpp[0m
+[  5%] [32m[1mLinking CXX executable /home/k/Desktop/git_repository/babymind19/catkin_ws/devel/.private/vicon_bridge/lib/vicon_bridge/testclient[0m
+[  5%] Built target geometry_msgs_generate_messages_cpp
 [35m[1mScanning dependencies of target vicon_bridge_gencfg[0m
 [  7%] [34m[1mGenerating dynamic reconfigure files from cfg/tf_distort.cfg: /home/k/Desktop/git_repository/babymind19/catkin_ws/devel/.private/vicon_bridge/include/vicon_bridge/tf_distortConfig.h /home/k/Desktop/git_repository/babymind19/catkin_ws/devel/.private/vicon_bridge/lib/python3/dist-packages/vicon_bridge/cfg/tf_distortConfig.py[0m
+[  7%] Built target testclient
 Generating reconfiguration files for tf_distort in vicon_bridge
 Wrote header file in /home/k/Desktop/git_repository/babymind19/catkin_ws/devel/.private/vicon_bridge/include/vicon_bridge/tf_distortConfig.h
 [  7%] Built target vicon_bridge_gencfg
@@ -36,51 +36,51 @@ Wrote header file in /home/k/Desktop/git_repository/babymind19/catkin_ws/devel/.
 [ 17%] [34m[1mGenerating C++ code from vicon_bridge/Markers.msg[0m
 [ 20%] [34m[1mGenerating C++ code from vicon_bridge/TfDistortInfo.msg[0m
 [ 23%] [34m[1mGenerating C++ code from vicon_bridge/viconCalibrateSegment.srv[0m
+[ 25%] [34m[1mGenerating C++ code from vicon_bridge/viconGrabPose.srv[0m
 [35m[1mScanning dependencies of target vicon_bridge_generate_messages_py[0m
-[ 25%] [34m[1mGenerating Python from MSG vicon_bridge/Markers[0m
-[ 28%] [34m[1mGenerating Python from MSG vicon_bridge/TfDistortInfo[0m
-[ 30%] [34m[1mGenerating Python from MSG vicon_bridge/Marker[0m
-[ 33%] [34m[1mGenerating Python code from SRV vicon_bridge/viconCalibrateSegment[0m
-[ 35%] [34m[1mGenerating Python code from SRV vicon_bridge/viconGrabPose[0m
+[ 28%] [34m[1mGenerating Python from MSG vicon_bridge/Marker[0m
+[ 28%] Built target vicon_bridge_generate_messages_cpp
 [35m[1mScanning dependencies of target vicon_bridge_generate_messages_eus[0m
-[35m[1mScanning dependencies of target vicon_bridge_generate_messages_lisp[0m
-[ 38%] [34m[1mGenerating EusLisp code from vicon_bridge/Marker.msg[0m
-[ 41%] [34m[1mGenerating Lisp code from vicon_bridge/Marker.msg[0m
-[ 43%] [34m[1mGenerating C++ code from vicon_bridge/viconGrabPose.srv[0m
-[ 46%] [34m[1mGenerating Lisp code from vicon_bridge/Markers.msg[0m
-[ 48%] [34m[1mGenerating EusLisp code from vicon_bridge/Markers.msg[0m
-[ 51%] [34m[1mGenerating Python msg __init__.py for vicon_bridge[0m
-[ 53%] [34m[1mGenerating EusLisp code from vicon_bridge/TfDistortInfo.msg[0m
-[ 56%] [34m[1mGenerating Lisp code from vicon_bridge/TfDistortInfo.msg[0m
+[ 30%] [34m[1mGenerating EusLisp code from vicon_bridge/Marker.msg[0m
+[ 33%] [34m[1mGenerating Python from MSG vicon_bridge/Markers[0m
+[ 35%] [34m[1mGenerating EusLisp code from vicon_bridge/Markers.msg[0m
+[ 38%] [34m[1mGenerating Python from MSG vicon_bridge/TfDistortInfo[0m
+[ 41%] [34m[1mGenerating EusLisp code from vicon_bridge/TfDistortInfo.msg[0m
+[ 43%] [34m[1mGenerating Python code from SRV vicon_bridge/viconCalibrateSegment[0m
+[ 46%] [34m[1mGenerating EusLisp code from vicon_bridge/viconCalibrateSegment.srv[0m
+[ 48%] [34m[1mGenerating Python code from SRV vicon_bridge/viconGrabPose[0m
+[ 51%] [34m[1mGenerating EusLisp code from vicon_bridge/viconGrabPose.srv[0m
+[ 53%] [34m[1mGenerating EusLisp manifest code for vicon_bridge[0m
+[ 56%] [34m[1mGenerating Python msg __init__.py for vicon_bridge[0m
 [ 58%] [34m[1mGenerating Python srv __init__.py for vicon_bridge[0m
-[ 61%] [34m[1mGenerating EusLisp code from vicon_bridge/viconCalibrateSegment.srv[0m
-[ 64%] [34m[1mGenerating Lisp code from vicon_bridge/viconCalibrateSegment.srv[0m
-[ 64%] Built target vicon_bridge_generate_messages_py
-[ 69%] [34m[1mGenerating EusLisp manifest code for vicon_bridge[0m
-[ 69%] [34m[1mGenerating EusLisp code from vicon_bridge/viconGrabPose.srv[0m
+[ 58%] Built target vicon_bridge_generate_messages_py
+[35m[1mScanning dependencies of target vicon_bridge_generate_messages_lisp[0m
+[ 61%] [34m[1mGenerating Lisp code from vicon_bridge/Marker.msg[0m
+[ 64%] [34m[1mGenerating Lisp code from vicon_bridge/Markers.msg[0m
+[ 66%] [34m[1mGenerating Lisp code from vicon_bridge/TfDistortInfo.msg[0m
+[ 69%] [34m[1mGenerating Lisp code from vicon_bridge/viconCalibrateSegment.srv[0m
+[ 69%] Built target vicon_bridge_generate_messages_eus
+[ 71%] [34m[1mGenerating Lisp code from vicon_bridge/viconGrabPose.srv[0m
+[ 71%] Built target vicon_bridge_generate_messages_lisp
 [35m[1mScanning dependencies of target vicon_bridge_generate_messages_nodejs[0m
-[ 69%] Built target vicon_bridge_generate_messages_cpp
-[ 71%] [34m[1mGenerating Javascript code from vicon_bridge/Marker.msg[0m
-[ 74%] [34m[1mGenerating Lisp code from vicon_bridge/viconGrabPose.srv[0m
-[35m[1mScanning dependencies of target vicon_bridge_gencpp[0m
-[ 74%] Built target vicon_bridge_gencpp
+[ 74%] [34m[1mGenerating Javascript code from vicon_bridge/Marker.msg[0m
 [ 76%] [34m[1mGenerating Javascript code from vicon_bridge/Markers.msg[0m
-[ 76%] Built target vicon_bridge_generate_messages_lisp
 [ 79%] [34m[1mGenerating Javascript code from vicon_bridge/TfDistortInfo.msg[0m
 [ 82%] [34m[1mGenerating Javascript code from vicon_bridge/viconCalibrateSegment.srv[0m
+[ 84%] [34m[1mGenerating Javascript code from vicon_bridge/viconGrabPose.srv[0m
+[ 84%] Built target vicon_bridge_generate_messages_nodejs
+[35m[1mScanning dependencies of target vicon_bridge_gencpp[0m
+[ 84%] Built target vicon_bridge_gencpp
+[35m[1mScanning dependencies of target vicon_bridge_generate_messages[0m
+[ 84%] Built target vicon_bridge_generate_messages
 [35m[1mScanning dependencies of target tf_distort[0m
-[ 84%] [32mBuilding CXX object CMakeFiles/tf_distort.dir/src/tf_distort.cpp.o[0m
 [35m[1mScanning dependencies of target vicon_bridge[0m
-[ 87%] [34m[1mGenerating Javascript code from vicon_bridge/viconGrabPose.srv[0m
+[ 87%] [32mBuilding CXX object CMakeFiles/tf_distort.dir/src/tf_distort.cpp.o[0m
 [ 89%] [32mBuilding CXX object CMakeFiles/vicon_bridge.dir/src/vicon_bridge.cpp.o[0m
-[ 89%] Built target vicon_bridge_generate_messages_nodejs
-[ 89%] Built target vicon_bridge_generate_messages_eus
 [35m[1mScanning dependencies of target calibrate[0m
 [ 92%] [32mBuilding CXX object CMakeFiles/calibrate.dir/src/calibrate_segment.cpp.o[0m
 [ 94%] [32m[1mLinking CXX executable /home/k/Desktop/git_repository/babymind19/catkin_ws/devel/.private/vicon_bridge/lib/vicon_bridge/calibrate[0m
 [ 94%] Built target calibrate
-[35m[1mScanning dependencies of target vicon_bridge_generate_messages[0m
-[ 94%] Built target vicon_bridge_generate_messages
 [ 97%] [32m[1mLinking CXX executable /home/k/Desktop/git_repository/babymind19/catkin_ws/devel/.private/vicon_bridge/lib/vicon_bridge/vicon_bridge[0m
 [ 97%] Built target vicon_bridge
 [100%] [32m[1mLinking CXX executable /home/k/Desktop/git_repository/babymind19/catkin_ws/devel/.private/vicon_bridge/lib/vicon_bridge/tf_distort[0m
