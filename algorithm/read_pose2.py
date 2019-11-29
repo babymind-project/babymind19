@@ -31,7 +31,7 @@ def projection(T, intrinsic):
 
 def read(config): 
     task_name = config['task_name']
-    camera = config['camera']
+    camera = config['camera']['camera']
     nb_object = config['object']['nb_object']
     scale = config['pose']['scale']
     fps = config['animation']['fps']
