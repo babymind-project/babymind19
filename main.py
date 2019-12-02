@@ -68,6 +68,9 @@ if __name__ == '__main__':
         read(config)
         read2(config)
 
+    elif module_name == 'compare_traj':
+        from lib.module.compare_traj import compare
+        compare(config)
 
     """    
     elif module_name == 'sfm_pose': # baseline1
@@ -102,9 +105,6 @@ if __name__ == '__main__':
         read(config)
         read2(config)
 
-    elif module_name == 'compare_traj':
-        from lib.module.compare_traj import compare
-        compare(config)
 
     elif module_name == 'imitation':
         from lib.module.Imitation import imitation
