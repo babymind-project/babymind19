@@ -46,11 +46,11 @@ def compare(config):
         rgb_demo_dir = data_dir+'/'+demo+'/rgb'
         cam_demo_dir = data_dir+'/'+demo+'/vicon/k_zed'        
         assert len(object_list) == 1 ## to do : multiple object
-        obj_demo_dir = data_dir_'/'+demo+'/vicon/'+object_list[0] 
+        obj_demo_dir = data_dir+'/'+demo+'/vicon/'+object_list[0] 
         se3_vision = np.load(pose_dir+'/'+demo+'/pose_traj.npy')
         se3_vicon = load_vicon(obj_demo_dir)
         se3_cam = laod_vicon(cam_demo_dir)
-        
+
         IPython.embed()
         sys.exit()
 
