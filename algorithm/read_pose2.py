@@ -52,7 +52,7 @@ def read(config):
     ax = fig.add_subplot(111)
 
     for demo_name, se3_traj in se3_dict.items():
-        output_path = output_dir+'/'+task_name
+        output_path = output_dir+'/'+demo_name
         util.create_dir(output_path, clear = True)
         img_list = sorted(glob.glob(data_dir+'/'+demo_name+'/rgb/*.npy'))
         

@@ -1,8 +1,0 @@
-prefix=/home/k/Desktop/git_repository/babymind19/catkin_ws/install
-
-Name: opencv_tests
-Description: Description of opencv_tests
-Version: 1.13.0
-Cflags: 
-Libs: -L/home/k/Desktop/git_repository/babymind19/catkin_ws/install/lib 
-Requires: 

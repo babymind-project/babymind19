@@ -38,6 +38,12 @@ If you want to record vision only
 python3 ./collect_data.py [task_name] [demo_name]
 ```
 
+!! Be sure all hardware collectly generates ros topics (/zed/zed_node/rgb, /vicon/k_xxx/k_xxx, ...)
+```
+rostopic list
+rostopic echo xxx
+```
+
 Check **"raw.bag.activate"** is generated in **"./data/[task_name]/[demo_name]"**.
 
 ### 2. convert bag file to rgb/depth/vcion data

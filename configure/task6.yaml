@@ -1,0 +1,44 @@
+task_name: task6
+
+camera:
+    camera: 'zed_mini'
+    camera_fps: 60
+    camera_resolution: VGA #VGA-672,376
+    depth_mode: ULTRA #PERFORMANCE
+    depth_max: 16000
+    depth_min: 100
+    image_size : [376, 672]
+    
+animation:
+    fps: 20
+
+preprocess:
+    skip_frame: NotImplemented
+    image_size: [188, 336]
+    scale : 0.5
+    
+segment:
+    batch_size: 1
+    learning_rate: 0.00001
+
+pose: 
+    batch_size : 1
+    scale : 0.5
+    learning_rate: 0.00001 
+
+
+
+
+
+
+robot:
+    acceleration: 0.3 #0.9
+    velocity: 0.5
+
+
+
+discriminator:
+    learning_rate: 0.0001
+
+object:
+    nb_object: 1

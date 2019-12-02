@@ -1,8 +1,0 @@
-prefix=/home/k/Desktop/git_repository/babymind19/catkin_ws/install
-
-Name: babymind
-Description: Description of babymind
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/k/Desktop/git_repository/babymind19/catkin_ws/install/lib 
-Requires: 
