@@ -30,7 +30,7 @@ def compare(config):
     execute 'read_bag' first
     '''
 
-    task_name = config['take_name']
+    task_name = config['task_name']
     fps = config['animation']['fps']
     object_list = util.load_txt('./configure/%s_objects.txt'%task_name)
     nb_object = len(object_list)
