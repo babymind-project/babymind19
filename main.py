@@ -69,7 +69,7 @@ if __name__ == '__main__':
         read2(config)
 
     elif module_name == 'compare_traj':
-        from lib.module.compare_traj import compare
+        from algorithm.compare_traj import compare
         compare(config)
 
     """    
