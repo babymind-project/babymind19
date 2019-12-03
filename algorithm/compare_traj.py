@@ -78,8 +78,8 @@ def compare(config, LOAD = False):
                 g_vo2_gt = se3_to_SE3(se3_vo2_gt[t,:])
                 se3_vo2 = SE3_to_se3(g_vo2)
                 #loss += np.sum(np.square(se3_vo2[:]-se3_vo2_gt[t,:]))
-                #loss += np.sum(np.square(g_vo2[0:3,3]-g_vo2_gt[0:3,3]))
-                loss += np.sum(np.square(g_vo2-g_vo2_gt))
+                loss += np.sum(np.square(g_vo2[0:3,3]-g_vo2_gt[0:3,3]))
+                #loss += np.sum(np.square(g_vo2-g_vo2_gt))
             return loss
         print(colored('initial_loss:'+str(objective_fn(x0)),'blue'))
         
@@ -125,7 +125,7 @@ def compare(config, LOAD = False):
             g_c2o1_t = se3_to_SE3(se3_c2o1[t,:])
             g_vc1_t = se3_to_SE3(se3_vc1[t,:])
             g_vo2_t = np.matmul(g_vc1_t, np.matmul(g_c1c2, np.matmul(g_c2o1_t, g_o1o2)))
-            #g_vo2_t[0:3,0:3] = np.matmul(SO3_align, g_vo2_t[0:3,0:3])
+            g_vo2_t[0:3,0:3] = np.matmul(SO3_align, g_vo2_t[0:3,0:3])
             
             se3_vo2_t_gt = SE3_to_se3(se3_to_SE3(se3_vo2_gt[t,:]))
             g_vo2_t_gt = se3_to_SE3(se3_vo2_t_gt)
@@ -148,11 +148,17 @@ def compare(config, LOAD = False):
             ax.set_zlabel('z(m)')
             fig.savefig(output_demo_dir+'/traj/%05d.png'%t)
 
+            ## rescale (||w|| = 1)
+            #se3_vo2_t[3:6] =  (1./np.sqrt(np.sum(np.square(se3_vo2_t[3:6]))))*se3_vo2_t[3:6]
+            #se3_vo2_t_gt[3:6] = (1./np.sqrt(np.sum(np.square(se3_vo2_t_gt[3:6]))))*se3_vo2_t_gt[3:6]
+
             loss += np.sqrt(np.sum(np.square(se3_vo2_t_gt-se3_vo2_t)))
             position_error.append( np.expand_dims( np.sqrt(np.sum(np.square(g_vo2_t_gt[0:3,3]-g_vo2_t[0:3,3]))),0))
             rotation_error.append( np.expand_dims( np.sqrt(np.sum(np.square(se3_vo2_t_gt[3:6]-se3_vo2_t[3:6]))),0))
+            
             vicon_traj.append(np.expand_dims(se3_vo2_t_gt,0))
             vision_traj.append(np.expand_dims(se3_vo2_t,0))
+
             if t == 0:
                 total_translation = 0
                 total_rotation = 0
@@ -182,17 +188,58 @@ def compare(config, LOAD = False):
 
         ## save plot
         fig = plt.figure()
+        ymins = []
+        ymaxs = []
+        axes = []
         for i in range(3):
-            plt.subplot(3,1,i+1)
-            plt.plot(np.arange(demo_len), vicon_traj[:,i], '--', color = 'r', alpha = 0.5, linewidth = 4)
-            plt.plot(np.arange(demo_len), vision_traj[:,i], color = 'g', alpha = 0.5, linewidth = 3)
+            ax = plt.subplot(3,1,i+1)
+            ax.plot(np.arange(demo_len), vicon_traj[:,i], '--', color = 'r', alpha = 0.5, linewidth = 4)
+            ax.plot(np.arange(demo_len), vision_traj[:,i], color = 'g', alpha = 0.5, linewidth = 3)
+            ymin, ymax = ax.get_ylim()
+            ymins.append(ymin)
+            ymaxs.append(ymax)
+        ymin = min(ymins)
+        ymax = max(ymaxs)
+        for ax in axes:
+            ax.ylim([ymin, ymax])   
         fig.savefig(output_demo_dir+'/v_component.png')
         plt.close()
 
         fig = plt.figure()
+        ymins = []
+        ymaxs = []
+        axes = []
         for i in range(3):
-            plt.subplot(3,1,i+1)
-            plt.plot(np.arange(demo_len), vicon_traj[:,i+3], '--', color = 'r', alpha = 0.5, linewidth = 4)
-            plt.plot(np.arange(demo_len), vision_traj[:,i+3], color = 'g', alpha = 0.5, linewidth = 3)
+            ax = plt.subplot(3,1,i+1)
+            ax.plot(np.arange(demo_len), vicon_traj[:,i+3], '--', color = 'r', alpha = 0.5, linewidth = 4)
+            ax.plot(np.arange(demo_len), vision_traj[:,i+3], color = 'g', alpha = 0.5, linewidth = 3)
+            ymin, ymax = ax.get_ylim()
+            ymins.append(ymin)
+            ymaxs.append(ymax)
+            axes.append(ax)
+        ymin = min(ymins)
+        ymax = max(ymaxs)
+        for ax in axes:
+            ax.set_ylim([ymin, ymax])   
         fig.savefig(output_demo_dir+'/w_component.png')
+        plt.close()
+
+        ## translation and rotation
+        fig = plt.figure()
+        ymins = []
+        ymaxs = []
+        axes = []
+        for i in range(3):
+            ax = plt.subplot(3,1,i+1)
+            ax.plot(np.arange(demo_len), T_vo2[:,i], '--', color = 'r', alpha = 0.5, linewidth = 4)
+            ax.plot(np.arange(demo_len), T_vo2_gt[:,i], color = 'g', alpha = 0.5, linewidth = 3)
+            ymin, ymax = ax.get_ylim()
+            ymins.append(ymin)
+            ymaxs.append(ymax)
+            axes.append(ax)
+        ymin = min(ymins)
+        ymax = max(ymaxs)
+        for ax in axes:
+            ax.set_ylim([ymin, ymax])   
+        fig.savefig(output_demo_dir+'/translation_component.png')
         plt.close()

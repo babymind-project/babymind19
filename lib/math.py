@@ -108,7 +108,7 @@ def wedge(x):
 def SO3_to_so3(R):
     thetha = np.arccos((np.trace(R) - 1)/2 )
     ## (Warning!!) if theta = ||w||  > 3.1415; then algorithm fails
-    thetha = (thetha*1e10)%(np.pi*1e10)/(1e10)
+    #thetha = (thetha*1e10)%(np.pi*1e10)/(1e10)
     if thetha == 0:
         w = np.zeros(3)
     else:   
@@ -150,7 +150,7 @@ def se3_to_SE3(xi):
         w_norm = np.sqrt( w[0]*w[0]+w[1]*w[1]+w[2]*w[2]) 
         new_w_norm = (w_norm*1e10)%(np.pi*1e10)/(1e10) 
         ######################################3
-        new_w = (new_w_norm/w_norm) * w  # w ############################################
+        new_w = w #(new_w_norm/w_norm) * w  # w ############################################
         
         w_hat = wedge(new_w)
         #R = scipy.linalg.expm(w_hat)
@@ -159,7 +159,6 @@ def se3_to_SE3(xi):
         R = np.eye(3) + (w_hat/w_norm) * np.sin(w_norm) + (np.matmul(w_hat,w_hat)/(w_norm*w_norm)) * (1 - np.cos(w_norm))
         T = np.matmul(np.eye(3) + (((1 - np.cos(w_norm)) / (w_norm**2)) * w_hat) + (((w_norm - np.sin(w_norm)) / (w_norm**3)) * np.matmul(w_hat,w_hat)),v)
         SE3 = RT_to_SE3(R,T)
-
     return SE3
 
 def SE3_to_se3(SE3):
@@ -168,7 +167,7 @@ def SE3_to_se3(SE3):
     thetha = np.arccos((np.trace(R) - 1)/2 )
     ## (Warning!!) if theta = ||w||  > 3.1415; then algorithm fails
     ############################################
-    thetha = (thetha*1e10)%(np.pi*1e10)/(1e10) 
+    #thetha = (thetha*1e10)%(np.pi*1e10)/(1e10) 
     
     if thetha == 0:
         v = T
