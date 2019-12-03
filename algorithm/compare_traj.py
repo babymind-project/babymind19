@@ -25,7 +25,7 @@ def load_vicon(vicon_dir):
     return np.concatenate(traj,0)
 
 
-def compare(config, load = False):
+def compare(config, LOAD = False):
     '''
     vicon data is required!
     execute 'read_bag' first
