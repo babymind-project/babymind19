@@ -9,6 +9,7 @@ import scipy
 from scipy import io
 from scipy.signal import medfilt
 from scipy.optimize import minimize
+from termcolor import colored
 
 from lib.math import *
 from lib import util
@@ -24,7 +25,7 @@ def load_vicon(vicon_dir):
     return np.concatenate(traj,0)
 
 
-def compare(config):
+def compare(config, load = False):
     '''
     vicon data is required!
     execute 'read_bag' first
@@ -80,7 +81,7 @@ def compare(config):
                 loss += np.sum(np.square(g_vo2[0:3,3]-g_vo2_gt[0:3,3]))
             return loss
         print(colored('initial_loss:'+str(objective_fn(x0)),'blue'))
-        LOAD = False
+        
         if LOAD:
             result = np.load(output_demo_dir+'/optimization.npy', allow_pickle = True).item()        
         else:
