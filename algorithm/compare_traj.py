@@ -106,6 +106,8 @@ def compare(config, LOAD = False):
         rotation_error = []
         vicon_traj = []
         vision_traj = []
+        vicon_euler = []
+        vision_euler = []
 
         demo_len = len(se3_c2o1)
         T_vo2 = np.zeros((0,3))
@@ -158,6 +160,8 @@ def compare(config, LOAD = False):
             
             vicon_traj.append(np.expand_dims(se3_vo2_t_gt,0))
             vision_traj.append(np.expand_dims(se3_vo2_t,0))
+            vicon_euler.append(np.expand_dims( R_to_euler(g_vo2_t_gt[0:3,0:3]),0))
+            vision_euler.append(np.expand_dims( R_to_euler(g_vo2_t[0:3,0:3]),0))
 
             if t == 0:
                 total_translation = 0
@@ -178,6 +182,9 @@ def compare(config, LOAD = False):
         
         vicon_traj = np.concatenate(vicon_traj,0)
         vision_traj = np.concatenate(vision_traj,0)
+        vicon_euler = np.concatenate(vicon_euler,0)
+        vision_euler = np.concatenate(vision_euler,0)
+        
         np.savetxt(output_demo_dir+'/loss.txt',[loss])
         np.savetxt(output_demo_dir+'/position_error.txt',[position_error])
         np.savetxt(output_demo_dir+'/rotation_error.txt',[rotation_error])
@@ -231,8 +238,8 @@ def compare(config, LOAD = False):
         axes = []
         for i in range(3):
             ax = plt.subplot(3,1,i+1)
-            ax.plot(np.arange(demo_len), T_vo2[:,i], '--', color = 'r', alpha = 0.5, linewidth = 4)
-            ax.plot(np.arange(demo_len), T_vo2_gt[:,i], color = 'g', alpha = 0.5, linewidth = 3)
+            ax.plot(np.arange(demo_len), T_vo2_gt[:,i], '--', color = 'r', alpha = 0.5, linewidth = 4)
+            ax.plot(np.arange(demo_len), T_vo2[:,i], color = 'g', alpha = 0.5, linewidth = 3)
             ymin, ymax = ax.get_ylim()
             ymins.append(ymin)
             ymaxs.append(ymax)
@@ -242,4 +249,23 @@ def compare(config, LOAD = False):
         for ax in axes:
             ax.set_ylim([ymin, ymax])   
         fig.savefig(output_demo_dir+'/translation_component.png')
+        plt.close()
+
+        fig = plt.figure()
+        ymins = []
+        ymaxs = []
+        axes = []
+        for i in range(3):
+            ax = plt.subplot(3,1,i+1)
+            ax.plot(np.arange(demo_len), vicon_euler[:,i], '--', color = 'r', alpha = 0.5, linewidth = 4)
+            ax.plot(np.arange(demo_len), vision_euler[:,i], color = 'g', alpha = 0.5, linewidth = 3)
+            ymin, ymax = ax.get_ylim()
+            ymins.append(ymin)
+            ymaxs.append(ymax)
+            axes.append(ax)
+        ymin = min(ymins)
+        ymax = max(ymaxs)
+        for ax in axes:
+            ax.set_ylim([ymin, ymax])   
+        fig.savefig(output_demo_dir+'/rotation_component.png')
         plt.close()

@@ -1,6 +1,7 @@
 from __future__ import division
 
 import copy
+import math
 import numpy as np
 import scipy
 import tensorflow as tf
@@ -20,6 +21,19 @@ euler_to_SO3(eulerZYX) == omega_to_SO3(rotvec)
 def np_sigmoid(x):
     sigm = 1./(1.+np.exp(-x))
     return sigm
+
+def R_to_euler(R) :
+    sy = math.sqrt(R[0,0] * R[0,0] +  R[1,0] * R[1,0])     
+    singular = sy < 1e-6
+    if  not singular :
+        x = math.atan2(R[2,1] , R[2,2])
+        y = math.atan2(-R[2,0], sy)
+        z = math.atan2(R[1,0], R[0,0])
+    else :
+        x = math.atan2(-R[1,2], R[1,1])
+        y = math.atan2(-R[2,0], sy)
+        z = 0
+    return np.array([x, y, z])
 
 def euler_to_SO3(euler, sined = False, angle_type = 'radian'):
     '''
