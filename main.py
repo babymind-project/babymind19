@@ -70,7 +70,7 @@ if __name__ == '__main__':
 
     elif module_name == 'compare_traj':
         from algorithm.compare_traj import compare
-        compare(config)
+        compare(config, CONTINUOUS)
 
     """    
     elif module_name == 'sfm_pose': # baseline1

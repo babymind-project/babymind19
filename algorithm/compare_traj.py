@@ -78,7 +78,8 @@ def compare(config, LOAD = False):
                 g_vo2_gt = se3_to_SE3(se3_vo2_gt[t,:])
                 se3_vo2 = SE3_to_se3(g_vo2)
                 #loss += np.sum(np.square(se3_vo2[:]-se3_vo2_gt[t,:]))
-                loss += np.sum(np.square(g_vo2[0:3,3]-g_vo2_gt[0:3,3]))
+                #loss += np.sum(np.square(g_vo2[0:3,3]-g_vo2_gt[0:3,3]))
+                loss += np.sum(np.square(g_vo2-g_vo2_gt))
             return loss
         print(colored('initial_loss:'+str(objective_fn(x0)),'blue'))
         
@@ -105,6 +106,7 @@ def compare(config, LOAD = False):
         rotation_error = []
         vicon_traj = []
         vision_traj = []
+
         demo_len = len(se3_c2o1)
         T_vo2 = np.zeros((0,3))
         T_vo2_gt = np.zeros((0,3))
@@ -123,7 +125,7 @@ def compare(config, LOAD = False):
             g_c2o1_t = se3_to_SE3(se3_c2o1[t,:])
             g_vc1_t = se3_to_SE3(se3_vc1[t,:])
             g_vo2_t = np.matmul(g_vc1_t, np.matmul(g_c1c2, np.matmul(g_c2o1_t, g_o1o2)))
-            g_vo2_t[0:3,0:3] = np.matmul(SO3_align, g_vo2_t[0:3,0:3])
+            #g_vo2_t[0:3,0:3] = np.matmul(SO3_align, g_vo2_t[0:3,0:3])
             
             se3_vo2_t_gt = SE3_to_se3(se3_to_SE3(se3_vo2_gt[t,:]))
             g_vo2_t_gt = se3_to_SE3(se3_vo2_t_gt)
@@ -151,11 +153,19 @@ def compare(config, LOAD = False):
             rotation_error.append( np.expand_dims( np.sqrt(np.sum(np.square(se3_vo2_t_gt[3:6]-se3_vo2_t[3:6]))),0))
             vicon_traj.append(np.expand_dims(se3_vo2_t_gt,0))
             vision_traj.append(np.expand_dims(se3_vo2_t,0))
-            
-            #total_position.append(np.expand_dims(g_vo2_t_gt[0:3,3],0))
-            #total_rotation.append(np.expand_dims(se3_vo2_t_gt[3:6],0))
-
+            if t == 0:
+                total_translation = 0
+                total_rotation = 0
+                prev_g_vo = g_vo2_t_gt
+                prev_se3_vo = se3_vo2_t_gt
+            else:
+                total_translation += np.sqrt(np.sum(np.square(g_vo2_t_gt[0:3,3]-prev_g_vo[0:3,3])))
+                total_rotation += np.sqrt(np.sum(np.square(se3_vo2_t_gt[3:6]-prev_se3_vo[3:6])))
+                prev_g_vo = g_vo2_t_gt
+                prev_se3_vo = se3_vo2_t_gt
         plt.close()
+
+        ## save loss
         loss = loss/demo_len
         position_error = np.sum(position_error)/demo_len #np.concatenate(position_error,0)
         rotation_error = np.sum(rotation_error)/demo_len #np.concatenate(rotation_error,0)
@@ -165,5 +175,24 @@ def compare(config, LOAD = False):
         np.savetxt(output_demo_dir+'/loss.txt',[loss])
         np.savetxt(output_demo_dir+'/position_error.txt',[position_error])
         np.savetxt(output_demo_dir+'/rotation_error.txt',[rotation_error])
+        np.savetxt(output_demo_dir+'/total_translation.txt',[total_translation])
+        np.savetxt(output_demo_dir+'/total_rotation.txt',[total_rotation])
         np.savetxt(output_demo_dir+'/vicon_traj.txt',vicon_traj)
         np.savetxt(output_demo_dir+'/vision_traj.txt',vision_traj)
+
+        ## save plot
+        fig = plt.figure()
+        for i in range(3):
+            plt.subplot(3,1,i+1)
+            plt.plot(np.arange(demo_len), vicon_traj[:,i], '--', color = 'r', alpha = 0.5, linewidth = 4)
+            plt.plot(np.arange(demo_len), vision_traj[:,i], color = 'g', alpha = 0.5, linewidth = 3)
+        fig.savefig(output_demo_dir+'/v_component.png')
+        plt.close()
+
+        fig = plt.figure()
+        for i in range(3):
+            plt.subplot(3,1,i+1)
+            plt.plot(np.arange(demo_len), vicon_traj[:,i+3], '--', color = 'r', alpha = 0.5, linewidth = 4)
+            plt.plot(np.arange(demo_len), vision_traj[:,i+3], color = 'g', alpha = 0.5, linewidth = 3)
+        fig.savefig(output_demo_dir+'/w_component.png')
+        plt.close()
