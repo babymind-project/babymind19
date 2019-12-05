@@ -5,9 +5,9 @@ python3 = True if sys.hexversion > 0x03000000 else False
 import genpy
 import struct
 
+import geometry_msgs.msg
 import std_msgs.msg
 import vicon_bridge.msg
-import geometry_msgs.msg
 
 class Markers(genpy.Message):
   _md5sum = "579f0637989aa8139ce6bf98cf7aabda"
