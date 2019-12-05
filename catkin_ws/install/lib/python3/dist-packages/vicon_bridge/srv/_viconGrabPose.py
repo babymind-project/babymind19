@@ -374,18 +374,18 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
-_struct_7d = None
-def _get_struct_7d():
-    global _struct_7d
-    if _struct_7d is None:
-        _struct_7d = struct.Struct("<7d")
-    return _struct_7d
 _struct_B3I = None
 def _get_struct_B3I():
     global _struct_B3I
     if _struct_B3I is None:
         _struct_B3I = struct.Struct("<B3I")
     return _struct_B3I
+_struct_7d = None
+def _get_struct_7d():
+    global _struct_7d
+    if _struct_7d is None:
+        _struct_7d = struct.Struct("<7d")
+    return _struct_7d
 class viconGrabPose(object):
   _type          = 'vicon_bridge/viconGrabPose'
   _md5sum = '396f27028ccc2718b2991cabdc1af144'

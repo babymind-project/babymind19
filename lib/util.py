@@ -114,7 +114,7 @@ class frame_to_video():
             video.write(cv2.imread(os.path.join(img_dir, img)))
         #IPython.embed()
 
-        cv2.destroyAllWindows()
+        #cv2.destroyAllWindows()
         video.release()
 
 

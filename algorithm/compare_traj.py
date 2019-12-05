@@ -61,6 +61,19 @@ def compare(config, LOAD = False):
         se3_vc1 = load_vicon(cam_demo_dir)
         se3_vo2_gt = load_vicon(obj_demo_dir)
         
+        # make vicon orientation = [0,0,0]
+        demo_len = len(se3_c2o1)
+        g_vo2_gt_0 = se3_to_SE3(se3_vo2_gt[0,:])
+        R0 = g_vo2_gt_0[0:3,0:3]
+        T0 = np.zeros(3)
+        g0 = RT_to_SE3(R0,T0)
+        
+        for t in range(demo_len):
+            
+
+
+
+
         x0 = np.random.rand(12)
         optimize_len = int(len(se3_c2o1))
         def objective_fn(x0):
@@ -109,7 +122,6 @@ def compare(config, LOAD = False):
         vicon_euler = []
         vision_euler = []
 
-        demo_len = len(se3_c2o1)
         T_vo2 = np.zeros((0,3))
         T_vo2_gt = np.zeros((0,3))
         
@@ -208,7 +220,7 @@ def compare(config, LOAD = False):
         ymin = min(ymins)
         ymax = max(ymaxs)
         for ax in axes:
-            ax.ylim([ymin, ymax])   
+            ax.set_ylim([ymin, ymax])   
         fig.savefig(output_demo_dir+'/v_component.png')
         plt.close()
 

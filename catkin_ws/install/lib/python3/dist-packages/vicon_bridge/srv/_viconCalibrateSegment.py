@@ -430,18 +430,18 @@ def _get_struct_B():
     if _struct_B is None:
         _struct_B = struct.Struct("<B")
     return _struct_B
-_struct_3I = None
-def _get_struct_3I():
-    global _struct_3I
-    if _struct_3I is None:
-        _struct_3I = struct.Struct("<3I")
-    return _struct_3I
 _struct_7d = None
 def _get_struct_7d():
     global _struct_7d
     if _struct_7d is None:
         _struct_7d = struct.Struct("<7d")
     return _struct_7d
+_struct_3I = None
+def _get_struct_3I():
+    global _struct_3I
+    if _struct_3I is None:
+        _struct_3I = struct.Struct("<3I")
+    return _struct_3I
 class viconCalibrateSegment(object):
   _type          = 'vicon_bridge/viconCalibrateSegment'
   _md5sum = 'ca1b34be858a36828126364b1a577794'
