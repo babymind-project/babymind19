@@ -178,15 +178,16 @@ def se3_to_SE3(xi):
 def SE3_to_se3(SE3):
     R = SE3[0:3,0:3]
     T = SE3[0:3,3]
-    thetha = np.arccos((np.trace(R) - 1)/2 )
-    ## (Warning!!) if theta = ||w||  > 3.1415; then algorithm fails
-    ############################################
-    thetha = (thetha*1e10)%(np.pi*1e10)/(1e10) 
     
-    if thetha == 0:
+    if np.sum( np.square(R-np.eye(3))) < 1e-10:
         v = T
         w = np.zeros(3)
     else:   
+        thetha = np.arccos((np.trace(R) - 1)/2 )
+        ## (Warning!!) if theta = ||w||  > 3.1415; then algorithm fails
+        ## R = I ==> theta = +-inf
+        ############################################
+        thetha = (thetha*1e10)%(np.pi*1e10)/(1e10) 
         w = thetha * (1./(2.*np.sin(thetha)))*np.asarray([R[2,1] - R[1,2], R[0,2] - R[2,0], R[1,0] - R[0,1]])
         w_hat = wedge(w)
         v = np.matmul(np.eye(3) - (1/2 * (w_hat)) + (((1/(thetha * thetha)) * (1 - ((thetha * np.sin(thetha)) / (2*(1 - np.cos(thetha)))))) * np.matmul(w_hat, w_hat)),T)

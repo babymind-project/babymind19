@@ -66,13 +66,12 @@ def compare(config, LOAD = False):
         g_vo2_gt_0 = se3_to_SE3(se3_vo2_gt[0,:])
         R0 = g_vo2_gt_0[0:3,0:3]
         T0 = np.zeros(3)
-        g0 = RT_to_SE3(R0,T0)
-        
+        g0_inv = RT_to_SE3(np.transpose(R0),T0)
         for t in range(demo_len):
-            
-
-
-
+            g_vo2_gt_t = se3_to_SE3(se3_vo2_gt[t,:])
+            new_g_vo2_gt_t = np.matmul(g_vo2_gt_t, g0_inv)
+            new_se3_vo2_gt_t = SE3_to_se3(new_g_vo2_gt_t)
+            se3_vo2_gt[t,:] = new_se3_vo2_gt_t
 
         x0 = np.random.rand(12)
         optimize_len = int(len(se3_c2o1))
@@ -90,20 +89,29 @@ def compare(config, LOAD = False):
                 g_vo2 = np.matmul(g_vc1_t, np.matmul(g_c1c2, np.matmul(g_c2o1_t, g_o1o2)))
                 g_vo2_gt = se3_to_SE3(se3_vo2_gt[t,:])
                 se3_vo2 = SE3_to_se3(g_vo2)
-                #loss += np.sum(np.square(se3_vo2[:]-se3_vo2_gt[t,:]))
-                loss += np.sum(np.square(g_vo2[0:3,3]-g_vo2_gt[0:3,3]))
-                #loss += np.sum(np.square(g_vo2-g_vo2_gt))
+                loss += np.sum(np.square(se3_vo2[:]-se3_vo2_gt[t,:])) #----------------
+                #loss += np.sum(np.square(g_vo2[0:3,3]-g_vo2_gt[0:3,3]))
+                #loss += np.sum(np.square(g_vo2-g_vo2_gt)) ----------------------
             return loss
         print(colored('initial_loss:'+str(objective_fn(x0)),'blue'))
         
         if LOAD:
             result = np.load(output_demo_dir+'/optimization.npy', allow_pickle = True).item()        
         else:
+            #'''
             result = minimize(objective_fn, 
                     x0, 
                     method='BFGS', 
-                    tol=1e-7,
-                    options={'gtol': 1e-6, 'disp': True})
+                    options={'disp': True})
+            #'''
+            '''
+            result = minimize(objective_fn, 
+                    x0, 
+                    method='BFGS', 
+                    tol=1e-8,
+                    options={'gtol': 1e-8, 'disp': True})
+            '''
+            
             np.save(output_demo_dir+'/optimization.npy',result)
         print(colored('optimized_loss:'+str(objective_fn(result.x)),'blue'))           
         g_c1c2 = se3_to_SE3(result.x[0:6])
@@ -134,13 +142,15 @@ def compare(config, LOAD = False):
         R_ori = g_vo2_0[0:3,0:3] 
         T_ori = g_vo2_0[0:3,3]
         SO3_align = np.matmul(R_target, np.transpose(R_ori)) 
-        
+        SE3_align = np.matmul(inv_SE3(g_vo2_0), g_vo2_0_gt)
+
         for t in range(demo_len):
             g_c2o1_t = se3_to_SE3(se3_c2o1[t,:])
             g_vc1_t = se3_to_SE3(se3_vc1[t,:])
             g_vo2_t = np.matmul(g_vc1_t, np.matmul(g_c1c2, np.matmul(g_c2o1_t, g_o1o2)))
-            g_vo2_t[0:3,0:3] = np.matmul(SO3_align, g_vo2_t[0:3,0:3])
-            
+            #g_vo2_t[0:3,0:3] = np.matmul(SO3_align, g_vo2_t[0:3,0:3])
+            g_vo2_t = np.matmul(g_vo2_t, SE3_align)
+
             se3_vo2_t_gt = SE3_to_se3(se3_to_SE3(se3_vo2_gt[t,:]))
             g_vo2_t_gt = se3_to_SE3(se3_vo2_t_gt)
             se3_vo2_t = SE3_to_se3(g_vo2_t)
@@ -150,7 +160,7 @@ def compare(config, LOAD = False):
 
             ax.clear()
             obj_vicon.apply_pose(se3_vo2_t)
-            obj_vision.apply_pose(se3_vo2_gt[t,:])
+            obj_vision.apply_pose(se3_vo2_t_gt)
             obj_vicon.plot(ax, scale = 0.015, linewidth = 3)
             obj_vision.plot(ax, scale = 0.015, linewidth = 3)
             ax.plot(T_vo2_gt[:t,0], T_vo2_gt[:t,1], T_vo2_gt[:t,2], '--', color = 'r', alpha = 0.5, linewidth = 4)
@@ -210,6 +220,7 @@ def compare(config, LOAD = False):
         ymins = []
         ymaxs = []
         axes = []
+        scales = []
         for i in range(3):
             ax = plt.subplot(3,1,i+1)
             ax.plot(np.arange(demo_len), vicon_traj[:,i], '--', color = 'r', alpha = 0.5, linewidth = 4)
@@ -217,10 +228,13 @@ def compare(config, LOAD = False):
             ymin, ymax = ax.get_ylim()
             ymins.append(ymin)
             ymaxs.append(ymax)
+            scales.append(ymax-ymin)
         ymin = min(ymins)
         ymax = max(ymaxs)
-        for ax in axes:
-            ax.set_ylim([ymin, ymax])   
+        scale_max = max(scales)
+        for ax, ymin, ymax in zip(axes, ymins, ymaxs):
+            center = (ymin+ymax)/2
+            ax.set_ylim([center-scale_max/2, center+scale_max/2])   
         fig.savefig(output_demo_dir+'/v_component.png')
         plt.close()
 
@@ -228,6 +242,7 @@ def compare(config, LOAD = False):
         ymins = []
         ymaxs = []
         axes = []
+        scales = []
         for i in range(3):
             ax = plt.subplot(3,1,i+1)
             ax.plot(np.arange(demo_len), vicon_traj[:,i+3], '--', color = 'r', alpha = 0.5, linewidth = 4)
@@ -236,10 +251,13 @@ def compare(config, LOAD = False):
             ymins.append(ymin)
             ymaxs.append(ymax)
             axes.append(ax)
+            scales.append(ymax-ymin)
         ymin = min(ymins)
         ymax = max(ymaxs)
-        for ax in axes:
-            ax.set_ylim([ymin, ymax])   
+        scale_max = max(scales)
+        for ax, ymin, ymax in zip(axes, ymins, ymaxs):
+            center = (ymin+ymax)/2
+            ax.set_ylim([center-scale_max/2, center+scale_max/2])   
         fig.savefig(output_demo_dir+'/w_component.png')
         plt.close()
 
@@ -248,6 +266,7 @@ def compare(config, LOAD = False):
         ymins = []
         ymaxs = []
         axes = []
+        scales = []
         for i in range(3):
             ax = plt.subplot(3,1,i+1)
             ax.plot(np.arange(demo_len), T_vo2_gt[:,i], '--', color = 'r', alpha = 0.5, linewidth = 4)
@@ -256,10 +275,13 @@ def compare(config, LOAD = False):
             ymins.append(ymin)
             ymaxs.append(ymax)
             axes.append(ax)
+            scales.append(ymax-ymin)
         ymin = min(ymins)
         ymax = max(ymaxs)
-        for ax in axes:
-            ax.set_ylim([ymin, ymax])   
+        scale_max = max(scales)
+        for ax, ymin, ymax in zip(axes, ymins, ymaxs):
+            center = (ymin+ymax)/2
+            ax.set_ylim([center-scale_max/2, center+scale_max/2])   
         fig.savefig(output_demo_dir+'/translation_component.png')
         plt.close()
 
@@ -267,6 +289,7 @@ def compare(config, LOAD = False):
         ymins = []
         ymaxs = []
         axes = []
+        scales = []
         for i in range(3):
             ax = plt.subplot(3,1,i+1)
             ax.plot(np.arange(demo_len), vicon_euler[:,i], '--', color = 'r', alpha = 0.5, linewidth = 4)
@@ -275,9 +298,12 @@ def compare(config, LOAD = False):
             ymins.append(ymin)
             ymaxs.append(ymax)
             axes.append(ax)
-        ymin = min(ymins)
-        ymax = max(ymaxs)
-        for ax in axes:
-            ax.set_ylim([ymin, ymax])   
+            scales.append(ymax-ymin)
+        ymin =  min(ymins)
+        ymax =  max(ymaxs)
+        scale_max = max(scales)
+        for ax, ymin, ymax in zip(axes, ymins, ymaxs):
+            center = (ymin+ymax)/2
+            ax.set_ylim([center-scale_max/2, center+scale_max/2])   
         fig.savefig(output_demo_dir+'/rotation_component.png')
         plt.close()
