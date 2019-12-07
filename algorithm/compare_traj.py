@@ -89,8 +89,8 @@ def compare(config, LOAD = False):
                 g_vo2 = np.matmul(g_vc1_t, np.matmul(g_c1c2, np.matmul(g_c2o1_t, g_o1o2)))
                 g_vo2_gt = se3_to_SE3(se3_vo2_gt[t,:])
                 se3_vo2 = SE3_to_se3(g_vo2)
-                #loss += np.sum(np.square(se3_vo2[:]-se3_vo2_gt[t,:])) #----------------
-                loss += np.sum(np.square(g_vo2[0:3,3]-g_vo2_gt[0:3,3]))
+                loss += np.sum(np.square(se3_vo2[:]-se3_vo2_gt[t,:])) #----------------
+                #loss += np.sum(np.square(g_vo2[0:3,3]-g_vo2_gt[0:3,3]))
                 #loss += np.sum(np.square(g_vo2-g_vo2_gt)) ----------------------
             return loss
         print(colored('initial_loss:'+str(objective_fn(x0)),'blue'))

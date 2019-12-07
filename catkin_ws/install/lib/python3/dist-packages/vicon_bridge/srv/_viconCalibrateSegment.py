@@ -187,8 +187,8 @@ python3 = True if sys.hexversion > 0x03000000 else False
 import genpy
 import struct
 
-import std_msgs.msg
 import geometry_msgs.msg
+import std_msgs.msg
 
 class viconCalibrateSegmentResponse(genpy.Message):
   _md5sum = "fd8b451f9e0c65ec25938e0acbd102d7"
@@ -424,6 +424,12 @@ _struct_I = genpy.struct_I
 def _get_struct_I():
     global _struct_I
     return _struct_I
+_struct_3I = None
+def _get_struct_3I():
+    global _struct_3I
+    if _struct_3I is None:
+        _struct_3I = struct.Struct("<3I")
+    return _struct_3I
 _struct_B = None
 def _get_struct_B():
     global _struct_B
@@ -436,12 +442,6 @@ def _get_struct_7d():
     if _struct_7d is None:
         _struct_7d = struct.Struct("<7d")
     return _struct_7d
-_struct_3I = None
-def _get_struct_3I():
-    global _struct_3I
-    if _struct_3I is None:
-        _struct_3I = struct.Struct("<3I")
-    return _struct_3I
 class viconCalibrateSegment(object):
   _type          = 'vicon_bridge/viconCalibrateSegment'
   _md5sum = 'ca1b34be858a36828126364b1a577794'
