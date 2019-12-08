@@ -96,7 +96,16 @@ def compare(config, LOAD = False):
         print(colored('initial_loss:'+str(objective_fn(x0)),'blue'))
         
         if LOAD:
-            result = np.load(output_demo_dir+'/optimization.npy', allow_pickle = True).item()        
+            result = np.load(output_demo_dir+'/optimization.npy', allow_pickle = True).item()
+            cmd = input('Optimization more? [y/n]')
+            if cmd =='y':
+                x0 = result.x
+                result = minimize(objective_fn, 
+                    x0, 
+                    method='BFGS', 
+                    options={'disp': True})
+            else:
+                pass
         else:
             #'''
             result = minimize(objective_fn, 
