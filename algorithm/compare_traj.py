@@ -158,7 +158,7 @@ def compare(config, LOAD = False):
             g_vc1_t = se3_to_SE3(se3_vc1[t,:])
             g_vo2_t = np.matmul(g_vc1_t, np.matmul(g_c1c2, np.matmul(g_c2o1_t, g_o1o2)))
             #g_vo2_t[0:3,0:3] = np.matmul(SO3_align, g_vo2_t[0:3,0:3])
-            g_vo2_t = np.matmul(g_vo2_t, SE3_align)
+            #g_vo2_t = np.matmul(g_vo2_t, SE3_align)
 
             se3_vo2_t_gt = SE3_to_se3(se3_to_SE3(se3_vo2_gt[t,:]))
             g_vo2_t_gt = se3_to_SE3(se3_vo2_t_gt)
