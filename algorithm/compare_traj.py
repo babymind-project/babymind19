@@ -237,6 +237,7 @@ def compare(config, LOAD = False):
             ymin, ymax = ax.get_ylim()
             ymins.append(ymin)
             ymaxs.append(ymax)
+            axes.append(ax)
             scales.append(ymax-ymin)
         ymin = min(ymins)
         ymax = max(ymaxs)
