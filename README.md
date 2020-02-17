@@ -22,9 +22,7 @@ vicon objects should be named same as defined in ./configure/[task_name]_objects
 source ./setup.sh
 ```
 
-### 1. 
-
-data  
+### 1. Collect data  
 To watch the field of view of the camera, following code will show an rviz map of the camera.
 ```
 python3 ./collect_data.py [task_name] [demo_name] --watch
@@ -60,7 +58,7 @@ Check **depth, rgb, vicon folders** are generated in **"./data/[task_name]/[demo
 python3 ./make_segment_label.py [task_name] [demo_name]
 ```
 
-### 4. Traning segmentation network
+### 4. Train segmentation network
 1) Execute python3 to train the segmentation network
 ```
 python3 ./main.py [task_name] segment --train
@@ -73,7 +71,7 @@ python3 ./main.py [task_name] segment --test
 ```
 - Check files created in **'./output/segment/[task_name]/'**
 
-### 5. Traning pose network
+### 5. Train pose network
 1) Execute python3 to train the pose network
 ```
 python3 ./main.py [task_name] pose --train
@@ -87,7 +85,7 @@ python3 ./main.py [task_name] pose --test
 - Check files created in **'./output/pose/[task_name]/'** 
 
 
-### 6. : Visualizing the trained result
+### 6. Visualize the trained result
 To visualize the trained output, you need to exectue the visualizing code.
 ```
 python3 ./main.py [task_name] read_pose
