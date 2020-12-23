@@ -38,7 +38,7 @@ If you want to record vision only
 python3 ./collect_data.py [task_name] [demo_name]
 ```
 
-!! Be sure all hardware collectly generates ros topics (/zed/zed_node/rgb, /vicon/k_xxx/k_xxx, ...)
+!! Be sure all hardware correctly generates ros topics (/zed/zed_node/rgb, /vicon/k_xxx/k_xxx, ...)
 ```
 rostopic list
 rostopic echo xxx
@@ -58,5 +58,40 @@ Check **depth, rgb, vicon folders** are generated in **"./data/[task_name]/[demo
 python3 ./make_segment_label.py [task_name] [demo_name]
 ```
 
-### 4.
+### 4. Train segmentation network
+1) Execute python3 to train the segmentation network
+```
+python3 ./main.py [task_name] segment --train
+```
+- Check a log and figures created: **./log/[task_name]/segment_train.txt**, **./figure/[task_name]/segment/**
+
+2) After the training converged, obtain the segmentation mask
+```
+python3 ./main.py [task_name] segment --test
+```
+- Check files created in **'./output/segment/[task_name]/'**
+
+### 5. Train pose network
+1) Execute python3 to train the pose network
+```
+python3 ./main.py [task_name] pose --train
+```
+- Check a log and figures created: **./log/[task_name]/pose_train.txt**, **./figure/[task_name]/pose/**
+
+2) After the network converged, obtain the trained pose
+```
+python3 ./main.py [task_name] pose --test
+```
+- Check files created in **'./output/pose/[task_name]/'** 
+
+
+### 6. Visualize the trained result
+To visualize the trained output, you need to exectue the visualizing code.
+```
+python3 ./main.py [task_name] read_pose
+```
+The pose trajectory will be plotted in **'./output/pose/read_pose/[task_name]'**. <br />
+The pose projection on an imag will be plotted in **'./output/pose/read_pose2/[task_name]'**.
+
+
 
